@@ -9,6 +9,10 @@ return new class extends Migration {
     {
         Schema::create('project_dates', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('project_id')->references('id')->on('projects')->onDelete('cascade');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->integer('type')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -9,6 +9,14 @@ return new class extends Migration {
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('description')->nullable();
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('status_id')->references('id')->on('statuses')->onDelete('cascade');
+            $table->foreignId('deal_status_id')->references('id')->on('statuses')->onDelete('cascade');
+            $table->integer('project_id')->nullable();
+            $table->string('Location')->nullable();
+            $table->string('venue')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

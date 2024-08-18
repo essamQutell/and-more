@@ -7,17 +7,18 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('supplier_teams', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('parent_id')->nullable()->constrained('services')->onDelete('cascade');
+            $table->foreignId('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
             $table->string('name');
-            $table->softDeletes();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('supplier_teams');
     }
 };
