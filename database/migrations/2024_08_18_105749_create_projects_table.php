@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->foreignId('status_id')->references('id')->on('statuses')->onDelete('cascade');
             $table->foreignId('deal_status_id')->references('id')->on('statuses')->onDelete('cascade');
             $table->integer('project_id')->nullable();
-            $table->string('Location')->nullable();
+            $table->string('location')->nullable();
             $table->string('venue')->nullable();
             $table->softDeletes();
             $table->timestamps();
