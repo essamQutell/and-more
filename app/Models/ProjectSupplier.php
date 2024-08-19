@@ -6,4 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProjectSupplier extends Model
 {
+
+    protected $table = 'project_suppliers';
+    protected $guarded = [];
+
 }

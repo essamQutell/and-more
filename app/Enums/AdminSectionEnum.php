@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums\Users;
+namespace App\Enums;
 
 enum AdminSectionEnum: int
 {
@@ -8,7 +8,6 @@ enum AdminSectionEnum: int
     case roles = 2;
     case users = 3;
     case settings = 4;
-
     case projects = 5;
     case suppliers = 6;
     case quotations = 7;

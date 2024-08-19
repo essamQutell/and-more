@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Status extends Model
 {
     use SoftDeletes;
+
+    protected $table = 'statuses';
+    protected $guarded = [];
+    protected array $dates = ['deleted_at'];
 }

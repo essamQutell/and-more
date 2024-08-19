@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum StatusEnum
+enum StatusEnum : int
 {
     //
 }
