@@ -5,29 +5,39 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AdminRequest;
 use App\Http\Resources\AdminResource;
 use App\Models\Admin;
+use App\Traits\ResponseTrait;
+use Illuminate\Http\JsonResponse;
 
 class AdminController extends Controller
 {
+    use ResponseTrait;
     public function index()
     {
-        return AdminResource::collection(Admin::all());
+        $admins = Admin::withoutSuperAdmin()->paginate(10);
+        return self::successResponsePaginate(data: AdminResource::collection($admins)->response()->getData(true));
     }
 
     public function store(AdminRequest $request)
     {
-        return new AdminResource(Admin::create($request->validated()));
+        $adminData = $request->safe()->except('role_id', 'password');
+        $admin = Admin::create($adminData);
+        $admin->syncRoles([$request->role_id]);
+
+        return self::successResponse(message: __('application.added'), data: AdminResource::make($admin));
     }
 
-    public function show(Admin $admin)
+    public function show(Admin $admin): JsonResponse
     {
-        return new AdminResource($admin);
+        return self::successResponse(data: AdminResource::make($admin));
     }
 
     public function update(AdminRequest $request, Admin $admin)
     {
-        $admin->update($request->validated());
+        $adminData = $request->safe()->except('password', 'role_id');
+        $admin->update($adminData);
+        $admin->syncRoles($request->role_id ? [$request->role_id] : []);
 
-        return new AdminResource($admin);
+        return self::successResponse(message: __('admin.updated'), data: AdminResource::make($admin));
     }
 
     public function destroy(Admin $admin)
