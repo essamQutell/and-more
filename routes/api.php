@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Http\Request;
@@ -22,7 +23,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('profile', [AuthController::class, 'profile']);
     });
     Route::apiResource('admins', AdminController::class);
-    Route::apiResource('roles', \App\Http\Controllers\RoleController::class);
+    Route::post('admins/{admin}/update', [AdminController::class, 'update']);
+
+    Route::apiResource('roles', RoleController::class);
     Route::apiResource('statuses', StatusController::class);
     Route::apiResource('suppliers', SupplierController::class);
 });

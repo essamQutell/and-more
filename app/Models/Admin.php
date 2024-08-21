@@ -20,12 +20,26 @@ class Admin extends Authenticatable implements MustVerifyEmail
 
     protected $guarded = [];
 
+    protected $with = ['roles'];
+
     protected array $dates = ['deleted_at'];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+        'created_at',
+        'updated_at',
+    ];
 
     protected $casts = [
         'email_verified_at' => 'datetime',
         // 'status' => StatusEnum::class,
     ];
+
+    public function role()
+    {
+        return $this->roles()->first();
+    }
 
     public function scopeWithoutSuperAdmin($query)
     {

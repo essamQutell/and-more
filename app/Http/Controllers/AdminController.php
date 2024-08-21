@@ -21,7 +21,7 @@ class AdminController extends Controller
     {
         $adminData = $request->safe()->except('role_id', 'password');
         $admin = Admin::create($adminData);
-        $admin->syncRoles([$request->role_id]);
+        //$admin->syncRoles([$request->role_id]);
 
         return self::successResponse(message: __('application.added'), data: AdminResource::make($admin));
     }
@@ -35,7 +35,7 @@ class AdminController extends Controller
     {
         $adminData = $request->safe()->except('password', 'role_id');
         $admin->update($adminData);
-        $admin->syncRoles($request->role_id ? [$request->role_id] : []);
+        //$admin->syncRoles($request->role_id ? [$request->role_id] : []);
 
         return self::successResponse(message: __('admin.updated'), data: AdminResource::make($admin));
     }
@@ -43,7 +43,6 @@ class AdminController extends Controller
     public function destroy(Admin $admin)
     {
         $admin->delete();
-
-        return response()->json();
+        return self::successResponse(message: __('admin.deleted'));
     }
 }

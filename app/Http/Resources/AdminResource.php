@@ -2,19 +2,21 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-/** @mixin Admin */
 class AdminResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
         return [
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'id' => $this->id,
+            'id' => (int)$this->id,
+            'role_id' => (int) $this->role()?->id,
+            'name' => (string)$this->name,
+            'email' => (string)$this->email,
+            'phone' => (string)$this->phone,
+            'access_token' => (string) $this->access_token,
+            'role_name' => (string) $this->role()?->name,
         ];
     }
 }
