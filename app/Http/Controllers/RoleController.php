@@ -31,7 +31,7 @@ class RoleController extends Controller
         $role = Role::create($request->only('name'));
         $role->givePermissions($request->permissions);
 
-        return self::successResponse(message: __('application.added'), data: RoleResource::make($role));
+        return self::successResponse(__('application.added'), RoleResource::make($role));
     }
 
     public function update(RoleRequest $request, Role $role): JsonResponse
@@ -39,7 +39,7 @@ class RoleController extends Controller
         $role->update($request->safe()->except('permissions'));
         $role->syncPermissions($request->permissions);
 
-        return self::successResponse(message: __('application.updated'), data: RoleResource::make($role));
+        return self::successResponse(__('application.updated'), RoleResource::make($role));
     }
 
     public function destroy(Role $role): JsonResponse

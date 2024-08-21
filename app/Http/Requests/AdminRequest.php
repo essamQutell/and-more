@@ -18,10 +18,5 @@ class AdminRequest extends ApiFormRequest
         ];
     }
 
-    public function prepareForValidation(): void
-    {
-        $this->admin->syncRoles($this->role_id ? [$this->role_id] : []);
-    }
-
 
 }
