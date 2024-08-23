@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatusController;
@@ -18,6 +19,7 @@ Route::controller(PermissionController::class)->group(function () {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('home', [HomeController::class, 'index']);
     Route::group(['prefix' => 'admin'], function () {
         Route::get('logout', [AuthController::class, 'logout']);
         Route::get('profile', [AuthController::class, 'profile']);
