@@ -14,7 +14,15 @@ class ProjectRequest extends ApiFormRequest
             'location' => ['required', 'string', 'max:255'],
             'venue' => ['required', 'string', 'max:255'],
 
-            ''
+            'dates' => ['required', 'array'],
+            'dates.*.type' => ['required', 'integer', 'max:255'],
+            'dates.*.start_date' => ['required', 'date'],
+            'dates.*.end_date' => ['required', 'date'],
+
+            'status_id' => ['required', 'exists:statuses,id'],
+            'deal_status_id' => ['required', 'exists:statuses,id'],
+
+            'users.*' => ['required', 'exists:users,id'],
 
         ];
     }
