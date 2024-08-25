@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\SupplierController;
@@ -28,6 +29,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('admins/{admin}/update', [AdminController::class, 'update']);
 
     Route::apiResource('roles', RoleController::class);
+    Route::apiResource('projects', ProjectController::class);
     Route::apiResource('statuses', StatusController::class);
     Route::apiResource('suppliers', SupplierController::class);
 });

@@ -12,4 +12,6 @@ class Status extends Model
     protected $table = 'statuses';
     protected $guarded = [];
     protected array $dates = ['deleted_at'];
+
+
 }

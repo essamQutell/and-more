@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Enums\DateEnum;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -12,9 +13,17 @@ class ProjectResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
             'id' => $this->id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'user' => $this->user?->name,
+            'location' => $this->location,
+            'venue' => $this->venue,
+            'event_dates' => ProjectDateResource::make($this->projectDates(DateEnum::event->value)),
+            'setup_dates' => ProjectDateResource::make($this->projectDates(DateEnum::setUp->value)),
+            'dismantle_dates' => ProjectDateResource::make($this->projectDates(DateEnum::dismantle->value)),
+            'status' => $this->statusName(),
+            'deal_status' => $this->dealStatusName(),
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -53,5 +54,10 @@ class Admin extends Authenticatable implements MustVerifyEmail
         return $query->whereHas('roles', function ($q) use ($role_id) {
             $q->where('role_id', '=', $role_id);
         });
+    }
+
+    public function projects(): BelongsToMany
+    {
+        return $this->belongsToMany(Project::class, 'project_admins', 'admin_id', 'project_id');
     }
 }

@@ -20,13 +20,12 @@ class AdminSeeder extends Seeder
         ]);
         $admin->addRole('super_admin');
 
-//        // Second Admin
-//        $admin2 = Admin::create([
-//            'name' => 'admin',
-//            'email' => 'admin@admin.com',
-//            'code' => '123123',
-//            'password' => bcrypt('12345678'),
-//        ]);
-//        $admin2->addRole('admin');
+        // Second Admin
+        $admin2 = Admin::create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('12345678'),
+        ]);
+        $admin2->addRole('super_admin');
     }
 }

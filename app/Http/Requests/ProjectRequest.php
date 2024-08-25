@@ -22,8 +22,7 @@ class ProjectRequest extends ApiFormRequest
             'status_id' => ['required', 'exists:statuses,id'],
             'deal_status_id' => ['required', 'exists:statuses,id'],
 
-            'users.*' => ['required', 'exists:users,id'],
-
+            'admins.*' => ['required', 'exists:admins,id'],
         ];
     }
 }
