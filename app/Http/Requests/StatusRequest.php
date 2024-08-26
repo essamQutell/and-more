@@ -2,19 +2,16 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 
-class StatusRequest extends FormRequest
+use Illuminate\Validation\Rule;
+
+class StatusRequest extends ApiFormRequest
 {
     public function rules(): array
     {
         return [
-
+            'name' => [Rule::requiredIf($this->routeIs('api.v1.statuses.store')), 'string', 'max:255'],
+            'type' => [Rule::requiredIf($this->routeIs('api.v1.statuses.store')),'in:1,2,3'],
         ];
-    }
-
-    public function authorize(): bool
-    {
-        return true;
     }
 }

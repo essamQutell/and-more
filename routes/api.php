@@ -29,7 +29,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('admins/{admin}/update', [AdminController::class, 'update']);
 
     Route::apiResource('roles', RoleController::class);
+    Route::post('roles/{role}/update', [RoleController::class,'update']);
+
     Route::apiResource('projects', ProjectController::class);
+    Route::post('projects/{project}/update', [ProjectController::class,'update']);
+
     Route::apiResource('statuses', StatusController::class);
+    Route::post('statuses/{status}/update', [StatusController::class,'update']);
+
     Route::apiResource('suppliers', SupplierController::class);
 });

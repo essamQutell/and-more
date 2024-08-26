@@ -27,6 +27,8 @@ return [
     'suppliers' => 'Suppliers',
     'quotations' => 'Quotations',
     'statuses' => 'Statuses',
+    'status' => 'Status',
+    'deal_statuses' => 'Deal Statuses',
     'manage' => 'Manage',
     'send' => 'Send',
     'must_verify' => 'We have sent a verification code to your mobile number!',

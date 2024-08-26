@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\StatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -12,6 +13,10 @@ class Status extends Model
     protected $table = 'statuses';
     protected $guarded = [];
     protected array $dates = ['deleted_at'];
+
+    protected $casts = [
+        'type' => StatusEnum::class
+    ];
 
 
 }
