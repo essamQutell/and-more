@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\SupplierController;
 use Illuminate\Http\Request;
@@ -36,6 +38,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::apiResource('statuses', StatusController::class);
     Route::post('statuses/{status}/update', [StatusController::class,'update']);
+
+    Route::apiResource('services', ServiceController::class);
+    Route::post('services/{service}/update', [ServiceController::class,'update']);
+
+    Route::apiResource('categories', CategoryController::class);
+    Route::post('categories/{category}/update', [CategoryController::class,'update']);
 
     Route::apiResource('suppliers', SupplierController::class);
 });

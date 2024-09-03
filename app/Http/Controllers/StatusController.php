@@ -19,6 +19,7 @@ class StatusController extends Controller
     public function store(StatusRequest $request)
     {
         $status = Status::create($request->validated());
+
         return self::successResponse(__('application.added'), StatusResource::make($status));
     }
 
