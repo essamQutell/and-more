@@ -13,7 +13,11 @@ class ServiceResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
+            'main_service' => (string)$this->service?->main_service,
+            'name_ar' => $this->name_ar,
+            'name_en' => $this->name_en,
+            'name' => (string)$this->name,
+
         ];
     }
 }
