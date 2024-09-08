@@ -13,7 +13,7 @@ class ServiceController extends Controller
 
     public function index()
     {
-        $services = Service::paginate(10);
+        $services = Service::whereParentId(null)->paginate(10);
 
         return self::successResponsePaginate(data: ServiceResource::collection($services)->response()->getData(true));
     }

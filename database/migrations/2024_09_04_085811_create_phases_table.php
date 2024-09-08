@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('phases', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('parent_id')->nullable()->constrained('services')->onDelete('cascade');
+            $table->foreignId('parent_id')->nullable()->constrained('phases')->onDelete('cascade');
             $table->string('name_ar');
             $table->string('name_en');
             $table->timestamps();

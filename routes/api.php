@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PhaseController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServiceController;
@@ -44,6 +45,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::apiResource('categories', CategoryController::class);
     Route::post('categories/{category}/update', [CategoryController::class,'update']);
+
+    Route::apiResource('phases', PhaseController::class);
+    Route::post('phases/{phase}/update', [PhaseController::class,'update']);
 
     Route::apiResource('suppliers', SupplierController::class);
 });
