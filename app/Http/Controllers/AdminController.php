@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AdminRequest;
 use App\Http\Resources\AdminResource;
 use App\Models\Admin;
+use App\Models\Role;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
 
@@ -14,6 +15,14 @@ class AdminController extends Controller
     public function index()
     {
         $admins = Admin::withoutSuperAdmin()->paginate(10);
+        return self::successResponsePaginate(data: AdminResource::collection($admins)->response()->getData(true));
+    }
+
+    public function adminsByRole(Role $role)
+    {
+        $admins = Admin::whereHas('roles', function ($query) use ($role) {
+            $query->whereId($role->id);
+        })->paginate(10);
         return self::successResponsePaginate(data: AdminResource::collection($admins)->response()->getData(true));
     }
 

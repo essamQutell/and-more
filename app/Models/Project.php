@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\DateEnum;
+use App\Enums\ProjectType;
 use App\Enums\StatusEnum;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,10 @@ class Project extends Model
     protected $guarded = [];
 
     protected array $dates = ['deleted_at'];
+
+    protected $casts = [
+        'type' => ProjectType::class
+    ];
 
     public function statusName()
     {

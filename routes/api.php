@@ -30,6 +30,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
     Route::apiResource('admins', AdminController::class);
     Route::post('admins/{admin}/update', [AdminController::class, 'update']);
+    Route::get('admins/{role}/role', [AdminController::class, 'adminsByRole']);
 
     Route::apiResource('roles', RoleController::class);
     Route::post('roles/{role}/update', [RoleController::class,'update']);
