@@ -25,7 +25,7 @@ class ProjectResource extends JsonResource
             'dismantle_dates' => ProjectDateResource::make($this->projectDates(DateEnum::dismantle->value)),
             'status' => $this->statusName(),
             'deal_status' => $this->dealStatusName(),
-           // 'roles' => AdminResource::collection($this->admins),
+            'roles' => $this->getRoles(),
         ];
     }
 }

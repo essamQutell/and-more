@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Enums\DateEnum;
 use App\Enums\ProjectType;
 use App\Enums\StatusEnum;
+use App\Http\Resources\RoleAdminResource;
+use App\Http\Resources\RoleResource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -34,6 +36,14 @@ class Project extends Model
     public function dealStatusName()
     {
         return $this->dealStatus()?->whereType(StatusEnum::deal->value)->first()->name;
+    }
+
+
+    public function getRoles()
+    {
+        return $this->admins->groupBy('roles.id')->map(function ($admins) {
+            return RoleAdminResource::collection($admins->first()?->roles()->WithoutRoleSuperAdmin());
+        })->values();
     }
 
     public function projectDates($type)

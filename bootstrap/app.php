@@ -39,9 +39,9 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->render(function (Throwable $exception, Request $request) {
-            $handler = new HandlerError();
-
-            return $handler->handle($exception, $request);
-        });
+//        $exceptions->render(function (Throwable $exception, Request $request) {
+//            $handler = new HandlerError();
+//
+//            return $handler->handle($exception, $request);
+//        });
     })->create();

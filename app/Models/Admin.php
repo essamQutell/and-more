@@ -39,7 +39,7 @@ class Admin extends Authenticatable implements MustVerifyEmail
 
     public function role()
     {
-        return $this->roles()->first();
+        return $this->roles()?->first();
     }
 
     public function scopeWithoutSuperAdmin($query)
