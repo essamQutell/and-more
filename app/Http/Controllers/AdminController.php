@@ -29,6 +29,7 @@ class AdminController extends Controller
     public function store(AdminRequest $request)
     {
         $adminData = $request->safe()->except('role_id', 'password');
+        $adminData['password'] = bcrypt($request->password);
         $admin = Admin::create($adminData);
         $admin->syncRoles([$request->role_id]);
 
@@ -43,6 +44,9 @@ class AdminController extends Controller
     public function update(AdminRequest $request, Admin $admin)
     {
         $adminData = $request->safe()->except('password', 'role_id');
+        if ($request->password) {
+            $adminData['password'] = bcrypt($request->password);
+        }
         $admin->update($adminData);
         $admin->syncRoles($request->role_id ? [$request->role_id] : []);
 
