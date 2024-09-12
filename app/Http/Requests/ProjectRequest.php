@@ -13,7 +13,7 @@ class ProjectRequest extends ApiFormRequest
             'client_name' => ['required', 'string', 'max:255'],
             'location' => ['required', 'string', 'max:255'],
             'venue' => ['required', 'string', 'max:255'],
-            'type' => ['required', 'integer', 'max:255'],
+            'type_id' => ['required', 'integer', 'max:255'],
 
             'dates' => ['required', 'array'],
             'dates.*.type' => ['integer', 'max:255'],

@@ -11,7 +11,7 @@ class StatusRequest extends ApiFormRequest
     {
         return [
             'name' => [Rule::requiredIf($this->routeIs('api.v1.statuses.store')), 'string', 'max:255'],
-            'type' => [Rule::requiredIf($this->routeIs('api.v1.statuses.store')),'in:1,2,3'],
+            'type_id' => [Rule::requiredIf($this->routeIs('api.v1.statuses.store')),'in:1,2,3'],
         ];
     }
 }
