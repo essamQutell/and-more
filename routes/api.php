@@ -29,26 +29,26 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('profile', [AuthController::class, 'profile']);
     });
     Route::apiResource('admins', AdminController::class);
-    Route::post('admins/{admin}/update', [AdminController::class, 'update']);
     Route::get('admins/{role}/role', [AdminController::class, 'adminsByRole']);
+    Route::post('admins/update/{admin}', [AdminController::class, 'update']);
 
     Route::apiResource('roles', RoleController::class);
-    Route::post('roles/{role}/update', [RoleController::class,'update']);
+    Route::post('roles/update/{role}', [RoleController::class,'update']);
 
     Route::apiResource('projects', ProjectController::class);
-    Route::post('projects/{project}/update', [ProjectController::class,'update']);
+    Route::post('projects/update/{project}', [ProjectController::class,'update']);
 
     Route::apiResource('statuses', StatusController::class);
-    Route::post('statuses/{status}/update', [StatusController::class,'update']);
+    Route::post('statuses/update/{status}', [StatusController::class,'update']);
 
     Route::apiResource('services', ServiceController::class);
-    Route::post('services/{service}/update', [ServiceController::class,'update']);
+    Route::post('services/update/{service}', [ServiceController::class,'update']);
 
     Route::apiResource('categories', CategoryController::class);
-    Route::post('categories/{category}/update', [CategoryController::class,'update']);
+    Route::post('categories/update/{category}', [CategoryController::class,'update']);
 
     Route::apiResource('phases', PhaseController::class);
-    Route::post('phases/{phase}/update', [PhaseController::class,'update']);
+    Route::post('phases/update/{phase}', [PhaseController::class,'update']);
 
     Route::apiResource('suppliers', SupplierController::class);
 });
