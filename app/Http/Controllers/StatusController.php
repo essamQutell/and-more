@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\StatusEnum;
 use App\Http\Requests\StatusRequest;
+use App\Http\Resources\SettingListResource;
 use App\Http\Resources\StatusResource;
 use App\Models\Status;
 use App\Traits\ResponseTrait;
@@ -10,6 +12,11 @@ use App\Traits\ResponseTrait;
 class StatusController extends Controller
 {
     use ResponseTrait;
+
+    public function getStatus()
+    {
+        return self::successResponse(data: SettingListResource::collection(StatusEnum::cases()));
+    }
     public function index()
     {
         $statuses = Status::paginate(10);

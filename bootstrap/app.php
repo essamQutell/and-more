@@ -37,6 +37,10 @@ return Application::configure(basePath: dirname(__DIR__))
             TrimStrings::class,
             ConvertEmptyStringsToNull::class,
         ]);
+        $middleware->api(append: [
+            App\Http\Middleware\AppLanguage::class,
+            'throttle:60,1',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
 //        $exceptions->render(function (Throwable $exception, Request $request) {

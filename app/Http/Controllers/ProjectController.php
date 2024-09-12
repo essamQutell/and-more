@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ProjectType;
 use App\Http\Requests\ProjectRequest;
 use App\Http\Resources\ProjectResource;
+use App\Http\Resources\SettingListResource;
 use App\Models\Project;
 use App\Models\ProjectDate;
 use App\Services\ProjectService;
@@ -19,6 +21,11 @@ class ProjectController extends Controller
     public function __construct(ProjectService $projectService)
     {
         $this->projectService = $projectService;
+    }
+
+    public function getProjectTypes()
+    {
+        return self::successResponse(data: SettingListResource::collection(ProjectType::cases()));
     }
 
     public function index()

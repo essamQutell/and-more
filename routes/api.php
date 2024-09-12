@@ -21,7 +21,8 @@ Route::controller(PermissionController::class)->group(function () {
     Route::get('actions', 'actions');
     Route::get('roles/{role}/permissions', 'getPermissionsByRole');
 });
-
+Route::get('statuses/types', [StatusController::class,'getStatus']);
+Route::get('projects/types', [ProjectController::class,'getProjectTypes']);
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('home', [HomeController::class, 'index']);
     Route::group(['prefix' => 'admin'], function () {
