@@ -14,9 +14,10 @@ return new class extends Migration {
             $table->string('client_name')->nullable();
             $table->foreignId('status_id')->references('id')->on('statuses')->onDelete('cascade');
             $table->foreignId('deal_status_id')->references('id')->on('statuses')->onDelete('cascade');
-            $table->integer('type')->nullable();
+            $table->integer('type_id')->nullable();
             $table->integer('project_id')->nullable();
             $table->string('location')->nullable();
+            $table->integer('duration')->nullable();
             $table->string('venue')->nullable();
             $table->softDeletes();
             $table->timestamps();

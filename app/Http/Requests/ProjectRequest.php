@@ -10,6 +10,7 @@ class ProjectRequest extends ApiFormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
+            'duration' => ['required', 'integer', 'max:255'],
             'client_name' => ['required', 'string', 'max:255'],
             'location' => ['required', 'string', 'max:255'],
             'venue' => ['required', 'string', 'max:255'],

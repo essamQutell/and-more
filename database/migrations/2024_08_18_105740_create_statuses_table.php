@@ -9,8 +9,9 @@ return new class extends Migration {
     {
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('type');
+            $table->string('name_ar');
+            $table->string('name_en');
+            $table->integer('type_id');
             $table->softDeletes();
             $table->timestamps();
         });

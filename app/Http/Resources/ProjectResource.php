@@ -16,16 +16,17 @@ class ProjectResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
+            'duration' => (int)$this->duration,
             'client_name' => $this->client_name,
             'location' => $this->location,
             'venue' => $this->venue,
-            'type' => $this->type?->label(),
+            'type' => $this->type_id?->label(),
             'event_dates' => ProjectDateResource::make($this->projectDates(DateEnum::event->value)),
             'setup_dates' => ProjectDateResource::make($this->projectDates(DateEnum::setUp->value)),
             'dismantle_dates' => ProjectDateResource::make($this->projectDates(DateEnum::dismantle->value)),
             'status' => $this->statusName(),
             'deal_status' => $this->dealStatusName(),
-            'roles' => $this->getRoles(),
+            'admins' =>AdminResource::collection($this->admins),
         ];
     }
 }

@@ -17,6 +17,12 @@ class PhaseController extends Controller
         return self::successResponsePaginate(data: PhaseResource::collection($phases)->response()->getData(true));
     }
 
+    public function subPhases(Phase $phase)
+    {
+        $phases = Phase::whereParentId($phase->id)->paginate(10);
+        return self::successResponsePaginate(data: PhaseResource::collection($phases)->response()->getData(true));
+    }
+
     public function store(PhaseRequest $request)
     {
         $phase = Phase::create($request->validated());

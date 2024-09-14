@@ -25,25 +25,17 @@ class Project extends Model
     protected array $dates = ['deleted_at'];
 
     protected $casts = [
-        'type' => ProjectType::class
+        'type_id' => ProjectType::class
     ];
 
     public function statusName()
     {
-       return $this->status()?->whereType(StatusEnum::status->value)->first()->name;
+       return $this->status()?->whereTypeId(StatusEnum::status->value)->first()->name;
     }
 
     public function dealStatusName()
     {
-        return $this->dealStatus()?->whereType(StatusEnum::deal->value)->first()->name;
-    }
-
-
-    public function getRoles()
-    {
-        return $this->admins->groupBy('roles.id')->map(function ($admins) {
-            return RoleAdminResource::collection($admins->first()?->roles()->WithoutRoleSuperAdmin());
-        })->values();
+        return $this->dealStatus()?->whereTypeId(StatusEnum::deal->value)->first()->name;
     }
 
     public function projectDates($type)

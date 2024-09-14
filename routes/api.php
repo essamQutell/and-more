@@ -43,12 +43,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('statuses/update/{status}', [StatusController::class,'update']);
 
     Route::apiResource('services', ServiceController::class);
+    Route::get('sub-services/{service}', [ServiceController::class,'subServices']);
     Route::post('services/update/{service}', [ServiceController::class,'update']);
 
     Route::apiResource('categories', CategoryController::class);
     Route::post('categories/update/{category}', [CategoryController::class,'update']);
 
     Route::apiResource('phases', PhaseController::class);
+    Route::get('phases/{phase}', [PhaseController::class,'subPhases']);
     Route::post('phases/update/{phase}', [PhaseController::class,'update']);
 
     Route::apiResource('suppliers', SupplierController::class);
