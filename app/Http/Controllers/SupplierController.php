@@ -2,38 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SupplierRequest;
+use App\Http\Requests\Settings\PageRequest;
+use App\Http\Requests\Supplier\StoreSupplierRequest;
+use App\Http\Requests\Supplier\UpdateSupplierRequest;
 use App\Http\Resources\SupplierResource;
 use App\Models\Supplier;
+use App\Traits\ResponseTrait;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\JsonResponse;
 
 class SupplierController extends Controller
 {
-    public function index()
+    use ResponseTrait;
+
+    //todo: supplier index
+    public function index(Request $request, PageRequest $pageRequest, Supplier $supplier): JsonResponse
     {
-        return SupplierResource::collection(Supplier::all());
+        dd('fb');
+        $suppliers = Supplier::filter($request, (array)$supplier->filterableColumns)->paginate($pageRequest->page_count);
+        return self::successResponsePaginate(data: SupplierResource::collection($suppliers)->response()->getData(true));
     }
 
-    public function store(SupplierRequest $request)
+    //todo: supplier store
+    public function store(StoreSupplierRequest $request)
     {
-        return new SupplierResource(Supplier::create($request->validated()));
+        $supplier = Supplier::create($request->validated());
+        return self::successResponse(data: SupplierResource::make($supplier));
     }
 
-    public function show(Supplier $supplier)
+//todo: supplier show
+    public function show(Supplier $supplier): JsonResponse
     {
-        return new SupplierResource($supplier);
+        return self::successResponse(data: SupplierResource::make($supplier));
     }
 
-    public function update(SupplierRequest $request, Supplier $supplier)
+//todo: supplier update
+    public function update(UpdateSupplierRequest $request, Supplier $supplier)
     {
         $supplier->update($request->validated());
-
-        return new SupplierResource($supplier);
+        return self::successResponse(message: __('admin.updated'), data: SupplierResource::make($supplier));
     }
 
+//todo: supplier destroy
     public function destroy(Supplier $supplier)
     {
         $supplier->delete();
-
-        return response()->json();
+        return self::successResponse(message: __('application.deleted'));
     }
 }

@@ -12,9 +12,13 @@ class SupplierResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
             'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'address' => $this->address,
+            'balance' => $this->balance,
+            'created_at' => $this->created_at ? convert_date($this->created_at) : '',
         ];
     }
 }
