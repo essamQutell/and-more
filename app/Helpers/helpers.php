@@ -4,6 +4,13 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
+
+
+
+function convert_date(?string $date): string
+{
+    return Carbon::parse($date)->format('Y-m-d');
+}
 function folderPath(string $path): void
 {
     if (! file_exists($path)) {
