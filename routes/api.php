@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PhaseController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StatusController;
@@ -35,6 +36,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::apiResource('roles', RoleController::class);
     Route::post('roles/update/{role}', [RoleController::class,'update']);
+    Route::get('all/roles/admins', [RoleController::class,'rolesWithAdmins']);
 
     Route::apiResource('projects', ProjectController::class);
     Route::post('projects/update/{project}', [ProjectController::class,'update']);
@@ -52,6 +54,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('phases', PhaseController::class);
     Route::get('phases/{phase}', [PhaseController::class,'subPhases']);
     Route::post('phases/update/{phase}', [PhaseController::class,'update']);
+
+    Route::post('calculate/cost', [QuotationController::class,'calculateCost']);
 
     Route::apiResource('suppliers', SupplierController::class);
 });

@@ -16,10 +16,9 @@ class SupplierController extends Controller
     use ResponseTrait;
 
     //todo: supplier index
-    public function index(Request $request, PageRequest $pageRequest, Supplier $supplier): JsonResponse
+    public function index(): JsonResponse
     {
-        dd('fb');
-        $suppliers = Supplier::filter($request, (array)$supplier->filterableColumns)->paginate($pageRequest->page_count);
+        $suppliers = Supplier::paginate(10);
         return self::successResponsePaginate(data: SupplierResource::collection($suppliers)->response()->getData(true));
     }
 

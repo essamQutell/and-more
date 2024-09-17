@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
+use App\Http\Resources\RoleAdminResource;
 use App\Http\Resources\RoleResource;
 use App\Models\Role;
 use App\Traits\ResponseTrait;
@@ -16,9 +17,14 @@ class RoleController extends Controller
 
     public function index(): JsonResponse
     {
-        $roles = Role::paginate(10);
+        $roles = Role::WithoutRoleSuperAdmin()->paginate(10);
 
         return self::successResponsePaginate(data: RoleResource::collection($roles)->response()->getData(true));
+    }
+
+    public function rolesWithAdmins(): JsonResponse
+    {
+        return self::successResponse(data: RoleAdminResource::collection(Role::WithoutRoleSuperAdmin()->get()));
     }
 
     public function show(Role $role): JsonResponse
