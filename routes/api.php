@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PhaseController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectFlowController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServiceController;
@@ -64,6 +65,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('suppliers/{supplier}/update', [SupplierController::class, 'update']);
     Route::apiResource('supplier-teams', SupplierTeamController::class)->parameters([ 'supplier-teams' => 'supplierTeam']);
     Route::post('supplier-teams/{supplierTeam}/update', [SupplierTeamController::class,'update']);
+    Route::post('project-flow/phases/store', [ProjectFlowController::class,'storePhases']);
 
 
 });
