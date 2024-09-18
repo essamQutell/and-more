@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SupplierTeamFactory extends Factory
 {
-    protected $model = SupplierTeam::class;
 
-    public function definition()
+    public function definition():array
     {
         return [
             'name' => $this->faker->company,
