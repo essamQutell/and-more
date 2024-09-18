@@ -33,7 +33,7 @@ class AdminController extends Controller
         $admin = Admin::create($adminData);
         $admin->syncRoles([$request->role_id]);
 
-        return self::successResponse(message: __('application.added'), data: AdminResource::make($admin));
+        return self::successResponse( __('application.added'), AdminResource::make($admin));
     }
 
     public function show(Admin $admin): JsonResponse

@@ -28,7 +28,7 @@ class Project extends Model
         'type_id' => ProjectType::class
     ];
 
-    public function statusName()
+    public function statusName(): null
     {
        return $this->status()?->whereTypeId(StatusEnum::status->value)->first()->name;
     }

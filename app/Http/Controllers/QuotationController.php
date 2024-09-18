@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CalculateServiceRequest;
 use App\Http\Requests\CalculateServicesRequest;
 use App\Http\Requests\QuotationRequest;
+use App\Http\Resources\AdminResource;
 use App\Http\Resources\QuotationResource;
 use App\Http\Resources\ServiceCostResource;
 use App\Http\Resources\ServicesCostResource;
+use App\Models\Project;
 use App\Models\Quotation;
+use App\Models\QuotationService;
+use App\Services\CalculateCostService;
 use App\Services\ProjectService;
 use App\Traits\ResponseTrait;
 
@@ -16,38 +20,46 @@ class QuotationController extends Controller
 {
     use ResponseTrait;
 
+    private CalculateCostService $calculateCostService;
+
     private ProjectService $projectService;
 
-    public function __construct(ProjectService $projectService)
+    public function __construct(CalculateCostService $calculateCostService,ProjectService $projectService)
     {
+        $this->calculateCostService = $calculateCostService;
         $this->projectService = $projectService;
-    }
-    public function index()
-    {
-        return QuotationResource::collection(Quotation::all());
     }
 
     public function calculateServiceCost(CalculateServiceRequest $request)
     {
-        $serviceCost = $this->projectService->calculateSingleCost($request);
+        $serviceCost = $this->calculateCostService->calculateSingleCost($request);
 
-        return self::successResponse( data: ServiceCostResource::make($serviceCost));
+        return self::successResponse(data: ServiceCostResource::make($serviceCost));
     }
 
     public function calculateServicesCost(CalculateServicesRequest $request)
     {
-        $servicesCost = $this->projectService->calculateGeneralCost($request->services, $request->agency_fee);
-        return self::successResponse( data: ServicesCostResource::make($servicesCost));
+        $servicesCost = $this->calculateCostService->calculateGeneralCost($request->services, $request->agency_fee);
+        return self::successResponse(data: ServicesCostResource::make($servicesCost));
     }
 
     public function store(QuotationRequest $request)
     {
-        $quotation = Quotation::create($request->validated());
+        $servicesCost = $this->calculateCostService->calculateGeneralCost($request->services, $request->agency_fee);
+        $quotation = $this->projectService->createQuotation($request, $servicesCost);
+
+        $serviceCost = $this->calculateCostService->calculateSingleCost($request);
+        $this->projectService->createQuotationServices($quotation->id, $request->services, $serviceCost);
+
+        return self::successResponse(__('application.added'), QuotationResource::make($quotation));
+
     }
 
-    public function show(Quotation $quotation)
+    public function show(Project $project)
     {
-        return new QuotationResource($quotation);
+        $quotation = Quotation::whereProjectId($project->id)->first();
+            dd($quotation);
+        return self::successResponse(data: QuotationResource::make($quotation));
     }
 
     public function update(QuotationRequest $request, Quotation $quotation)
