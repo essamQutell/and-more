@@ -23,6 +23,7 @@ class Project extends Model
     protected $guarded = [];
 
     protected array $dates = ['deleted_at'];
+    protected $fillable = ['name', 'description', 'type_id', 'user_id', 'status_id', 'deal_status_id'];
 
     protected $casts = [
         'type_id' => ProjectType::class
@@ -30,7 +31,7 @@ class Project extends Model
 
     public function statusName(): null
     {
-       return $this->status()?->whereTypeId(StatusEnum::status->value)->first()->name;
+       return $this->status()?->whereTypeId(StatusEnum::status->value)->first()?->name;
     }
 
     public function dealStatusName()
@@ -67,6 +68,11 @@ class Project extends Model
     public function dates(): HasMany
     {
         return $this->hasMany(ProjectDate::class, 'project_id');
+    }
+
+    public function quotations(): HasMany
+    {
+        return $this->hasMany(Quotation::class, 'project_id');
     }
 
 }

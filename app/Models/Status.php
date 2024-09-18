@@ -16,6 +16,7 @@ class Status extends Model
     protected $table = 'statuses';
     protected $guarded = [];
     protected array $dates = ['deleted_at'];
+    protected $fillable = ['name_en', 'name_ar', 'type_id'];
 
     public function name(): Attribute
     {

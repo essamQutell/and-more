@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use App\Enums\ProjectType;
 use App\Http\Requests\ProjectRequest;
 use App\Http\Resources\ProjectResource;
+use App\Http\Resources\ScopeOFWorkResource;
 use App\Http\Resources\SettingListResource;
 use App\Models\Project;
-use App\Models\ProjectDate;
 use App\Services\ProjectService;
 use App\Traits\ResponseTrait;
-use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
@@ -57,5 +56,12 @@ class ProjectController extends Controller
         $project->admins()->sync($request->admins);
 
         return self::successResponse(__('application.updated'), ProjectResource::make($project));
+    }
+
+
+    //todo list scope of work
+    public function getScopeOfWork(Project $project)
+    {
+        return self::successResponse(data: ScopeOFWorkResource::make($project));
     }
 }

@@ -67,6 +67,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('supplier-teams', SupplierTeamController::class)->parameters([ 'supplier-teams' => 'supplierTeam']);
     Route::post('supplier-teams/{supplierTeam}/update', [SupplierTeamController::class,'update']);
     Route::post('project-flow/phases/store', [ProjectFlowController::class,'storePhases']);
+    Route::get('project/{project}/scope-work', [ProjectController::class,'getScopeOfWork']);
 
 
 });
