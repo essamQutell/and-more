@@ -42,6 +42,7 @@ class QuotationController extends Controller
 
     public function store(QuotationRequest $request)
     {
+        $quotation = Quotation::create($request->validated());
     }
 
     public function show(Quotation $quotation)

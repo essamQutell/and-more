@@ -58,5 +58,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('calculate/service/cost', [QuotationController::class,'calculateServiceCost']);
     Route::post('calculate/services/cost', [QuotationController::class,'calculateServicesCost']);
 
+    Route::post('store/quotation', [QuotationController::class,'store']);
+
     Route::apiResource('suppliers', SupplierController::class);
 });
