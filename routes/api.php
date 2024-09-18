@@ -60,6 +60,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('calculate/services/cost', [QuotationController::class,'calculateServicesCost']);
 
     Route::post('store/quotation', [QuotationController::class,'store']);
+    Route::get('quotation/{project}', [QuotationController::class,'quotationDetails']);
 
     Route::apiResource('suppliers', SupplierController::class);
     Route::post('suppliers/{supplier}/update', [SupplierController::class, 'update']);
