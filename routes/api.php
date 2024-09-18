@@ -12,7 +12,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\SupplierController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\SupplierTeamController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -61,7 +61,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('store/quotation', [QuotationController::class,'store']);
 
     Route::apiResource('suppliers', SupplierController::class);
-    Route::post('suppliers/{supplier}/update', [SupplierController::class,'update']);
+    Route::post('suppliers/{supplier}/update', [SupplierController::class, 'update']);
+    Route::apiResource('supplier-teams', SupplierTeamController::class)->parameters([ 'supplier-teams' => 'supplierTeam']);
+    Route::post('supplier-teams/{supplierTeam}/update', [SupplierTeamController::class,'update']);
 
 
 });
