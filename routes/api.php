@@ -55,7 +55,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('phases/{phase}', [PhaseController::class,'subPhases']);
     Route::post('phases/update/{phase}', [PhaseController::class,'update']);
 
-    Route::post('calculate/cost', [QuotationController::class,'calculateCost']);
+    Route::post('calculate/service/cost', [QuotationController::class,'calculateServiceCost']);
+    Route::post('calculate/services/cost', [QuotationController::class,'calculateServicesCost']);
 
     Route::apiResource('suppliers', SupplierController::class);
 });
