@@ -12,8 +12,11 @@ class SubServiceQuotationResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'qty' => $this->quotationServices()->first()?->quantity,
-            'days' => $this->quotationServices()->first()?->days,
+            'qty' => $this->quotationServices->first()?->quantity,
+            'days' => $this->quotationServices->first()?->days,
+            'margin' => $this->quotationServices->first()?->margin,
+            'sales_price' => $this->quotationServices->first()?->sales_price,
+            'cost' => $this->quotationServices->first()?->cost,
         ];
     }
 }
