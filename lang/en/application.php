@@ -218,6 +218,13 @@ return [
     'favorite' => 'favorite',
     'not_favorite' => ' not favorite',
     'removed' => 'removed Successfully',
+    'purchases' => 'Purchases',
+    'assets' => 'Assets',
+    'invoice' => 'Invoice',
+    'receipt' => 'Receipt',
+    'contract' => 'Contract',
+    'quotation' => 'Quotation',
+    'betty_cash' => 'Betty Cash',
 
 
 

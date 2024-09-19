@@ -5,12 +5,15 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PettyCashCategoryController;
+use App\Http\Controllers\PettyCashController;
 use App\Http\Controllers\PhaseController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectFlowController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SettingListController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\SupplierTeamController;
@@ -69,6 +72,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('supplier-teams/{supplierTeam}/update', [SupplierTeamController::class,'update']);
     Route::post('project-flow/phases/store', [ProjectFlowController::class,'storePhases']);
     Route::get('project/{project}/scope-work', [ProjectController::class,'getScopeOfWork']);
+    Route::get('list/items', [PettyCashController::class,'listItems']);
+    Route::get('list/attachments', [PettyCashController::class,'listAttachments']);
+    Route::post('petty-cash/store', [PettyCashController::class,'store']);
+    Route::post('petty-cash-category/store', [PettyCashCategoryController::class,'store']);
+    Route::get('petty-cash/{pettyCash}/show', [PettyCashController::class,'show']);
+    Route::get('petty-cash-category/{pettyCashCategory}/show', [PettyCashCategoryController::class,'show']);
+
 
 
 });

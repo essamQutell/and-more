@@ -244,5 +244,14 @@ return [
     'good'=>'جيد',
     'very_good'=>'جيد جدآ',
     'excellent'=>'ممتاز',
+    'purchases' => 'المشتريات',
+    'assets' => 'الاصول',
+
+    'invoice' => 'فاتورة',
+    'receipt' => 'استلام',
+    'contract' => 'عقد',
+    'quotation' => 'عرض',
+    'betty_cash' => 'بيتي كاش',
+
 
 ];
