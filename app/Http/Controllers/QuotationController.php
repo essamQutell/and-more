@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\StatusEnum;
 use App\Http\Requests\CalculateServiceRequest;
 use App\Http\Requests\CalculateServicesRequest;
 use App\Http\Requests\QuotationRequest;
@@ -15,6 +16,7 @@ use App\Models\QuotationService;
 use App\Services\CalculateCostService;
 use App\Services\ProjectService;
 use App\Traits\ResponseTrait;
+use Illuminate\Http\Request;
 
 class QuotationController extends Controller
 {
@@ -57,6 +59,12 @@ class QuotationController extends Controller
         $quotation = Quotation::with(['quotationServices.service.services'])->whereProjectId($project->id)->first();
 
         return self::successResponse(data: QuotationResource::make($quotation));
+    }
+
+    public function changeStatus(Quotation $quotation, Request $request)
+    {
+        $quotation->update(['status_id' => $request->status]);
+        return self::successResponse(__('application.updated'), QuotationResource::make($quotation));
     }
 
     public function update(QuotationRequest $request, Quotation $quotation)

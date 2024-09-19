@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->double('total_sales')->default(0);
             $table->double('total_project_sales')->default(0);
             $table->double('total_project')->default(0);
+            $table->integer('status')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
