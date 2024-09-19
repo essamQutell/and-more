@@ -2,13 +2,19 @@
 
 namespace App\Services;
 
-use App\Http\Requests\QuotationRequest;
 use App\Models\ProjectDate;
 use App\Models\Quotation;
 use App\Models\QuotationService;
 
 class ProjectService
 {
+    private CalculateCostService $calculateCostService;
+
+    public function __construct(CalculateCostService $calculateCostService)
+    {
+        $this->calculateCostService = $calculateCostService;
+    }
+
     public function createDates(array $dates, int $projectId): void
     {
         foreach ($dates as $date) {
@@ -21,8 +27,9 @@ class ProjectService
         }
     }
 
-    public function createQuotation(QuotationRequest $request, array $servicesCost): Quotation
+    public function createQuotation($request): Quotation
     {
+        $servicesCost = $this->calculateCostService->calculateGeneralCost($request->services, $request->agency_fee);
         return Quotation::create([
             'project_id' => $request->project_id,
             'total_cost' => $servicesCost['total_cost'],
@@ -35,9 +42,10 @@ class ProjectService
         ]);
     }
 
-    public function createQuotationServices(int $quotationId, array $services, array $serviceCost): void
+    public function createQuotationServices(int $quotationId, array $services): void
     {
         foreach ($services as $service) {
+            $serviceCost = $this->calculateCostService->calculateSingleCost($service);
             QuotationService::create([
                 'quotation_id' => $quotationId,
                 'service_id' => $service['id'],

@@ -45,11 +45,8 @@ class QuotationController extends Controller
 
     public function store(QuotationRequest $request)
     {
-        $servicesCost = $this->calculateCostService->calculateGeneralCost($request->services, $request->agency_fee);
-        $quotation = $this->projectService->createQuotation($request, $servicesCost);
-
-        $serviceCost = $this->calculateCostService->calculateSingleCost($request);
-        $this->projectService->createQuotationServices($quotation->id, $request->services, $serviceCost);
+        $quotation = $this->projectService->createQuotation($request);
+        $this->projectService->createQuotationServices($quotation->id, $request->services);
 
         return self::successResponse(__('application.added'), QuotationResource::make($quotation));
 

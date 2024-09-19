@@ -6,11 +6,11 @@ class CalculateCostService
 {
     public function calculateSingleCost($data): array
     {
-        $cost = $this->calculateCost($data->price, $data->quantity, $data->days);
-        $salesPrice = $this->calculateSalesPrice($data->price, $data->margin);
-        $totalSales = $this->calculateTotalSales($data->price, $data->margin, $data->quantity, $data->days);
+        $cost = $this->calculateCost($data['price'], $data['quantity'], $data['days']);
+        $salesPrice = $this->calculateSalesPrice($data['price'], $data['margin']);
+        $totalSales = $this->calculateTotalSales($data['price'], $data['margin'], $data['quantity'], $data['days']);
         $vat = $this->calculateVat($totalSales);
-        $margin = $this->calculateTotalMargin($cost,$totalSales);
+        $margin = $this->calculateMargin($cost,$totalSales);
 
         return [
             'cost' => $cost,
@@ -44,8 +44,8 @@ class CalculateCostService
                 $service['quantity'],
                 $service['days']
             );
-            $totalMargin = $this->calculateTotalMargin($totalCost, $totalSales);
             $agencyFee = $this->calculateAgencyFee($totalSales, $agencyFeeRate);
+            $totalMargin = $this->calculateTotalMargin($totalCost, $totalSales,$agencyFee);
             $totalProjectSales = $this->calculateTotalProjectSales($totalSales, $agencyFee);
             $vat = $this->calculateVat($totalProjectSales);
             $totalProject = $this->calculateTotalProject($totalProjectSales, $vat);
@@ -100,10 +100,14 @@ class CalculateCostService
         $margin = $price * ($marginPercentage / 100);
         return $price + $margin;
     }
-
-    private function calculateTotalMargin($totalCost, $totalSales)
+    private function calculateMargin($cost,$totalSales)
     {
-        return $totalSales - $totalCost;
+        return $cost - $totalSales;
+    }
+
+    private function calculateTotalMargin($totalCost, $totalSales, $agencyFeeRate = 0)
+    {
+        return ($totalSales - $totalCost) + $agencyFeeRate;
     }
 
     private function calculateAgencyFee($totalSales, $agencyFeeRate): float|int

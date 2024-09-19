@@ -19,6 +19,13 @@ class QuotationResource extends JsonResource
             'location' => $this->project->location,
             'project_date' => $this->project->dates()->whereType(DateEnum::event->value)->first()->start_date,
             'services' => ServiceQuotationResource::collection($this->quotationServices->map->service->unique('parent_id')),
+            'total_cost'=> $this->total_cost,
+            'total_sales'=> $this->total_sales,
+            'total_margin'=> $this->total_margin,
+            'agency_fee'=> $this->agency_fee,
+            'total_project_sales'=> $this->total_project_sales,
+            'vat'=> $this->total_vat,
+            'total_project'=> $this->total_project
         ];
     }
 }
