@@ -10,11 +10,11 @@ class ServiceQuotationResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
+            'id' => $this->quotationServices()->first()?->id,
+            'name' => $this->service->name,
             'sub_services' => SubServiceQuotationResource::collection(
-                $this->services()->where('id', $this->services()->first()->quotationServices()->first()->service_id
-                )->get()),
+                $this->service->services()->whereHas('quotationServices')->get()
+            ),
         ];
     }
 }

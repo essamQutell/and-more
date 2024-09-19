@@ -18,7 +18,7 @@ class QuotationResource extends JsonResource
             'client_name' => $this->project->client_name,
             'location' => $this->project->location,
             'project_date' => $this->project->dates()->whereType(DateEnum::event->value)->first()->start_date,
-            'services' => ServiceQuotationResource::make($this->quotationServices->first()->service->service),
+            'services' => ServiceQuotationResource::collection($this->quotationServices->map->service->unique('parent_id')),
         ];
     }
 }
