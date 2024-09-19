@@ -11,8 +11,9 @@ enum QuotationStatus : int
     public function label(): string
     {
         return match ($this) {
-            self::pending => __('application.status'),
-            self::deal => __('application.deal_statuses'),
+            self::pending => __('application.pending'),
+            self::approved => __('application.approved'),
+            self::rejected => __('application.rejected'),
         };
     }
 }
