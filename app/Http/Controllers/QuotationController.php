@@ -57,7 +57,8 @@ class QuotationController extends Controller
 
     public function quotationDetails(Project $project)
     {
-        $quotation = Quotation::whereProjectId($project->id)->first();
+        $quotation = Quotation::with(['quotationServices.service.services'])->whereProjectId($project->id)->first();
+
         return self::successResponse(data: QuotationResource::make($quotation));
     }
 

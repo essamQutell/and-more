@@ -37,5 +37,10 @@ class Service extends Model
         return $this->hasMany(Service::class, 'parent_id');
     }
 
+    public function quotationServices(): HasMany
+    {
+        return $this->hasMany(QuotationService::class);
+    }
+
 
 }
