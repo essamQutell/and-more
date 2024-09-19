@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Project extends Model
@@ -29,14 +30,14 @@ class Project extends Model
         'type_id' => ProjectType::class
     ];
 
-    public function statusName(): null
+    public function statusName()
     {
        return $this->status()?->whereTypeId(StatusEnum::status->value)->first()?->name;
     }
 
     public function dealStatusName()
     {
-        return $this->dealStatus()?->whereTypeId(StatusEnum::deal->value)->first()->name;
+        return $this->dealStatus()?->whereTypeId(StatusEnum::deal->value)->first()?->name;
     }
 
     public function projectDates($type)
@@ -70,9 +71,9 @@ class Project extends Model
         return $this->hasMany(ProjectDate::class, 'project_id');
     }
 
-    public function quotations(): HasMany
+    public function quotation(): HasOne
     {
-        return $this->hasMany(Quotation::class, 'project_id');
+        return $this->hasOne(Quotation::class, 'project_id');
     }
 
 }

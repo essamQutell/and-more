@@ -12,8 +12,10 @@ class ScopeOFWorkResource extends JsonResource
      *
      * @return array<string, mixed>
      */
+
     public function toArray(Request $request): array
     {
+//        dd($this->quotation->quotationServices()->get());
         return [
             'id' => $this->id,
             'project_name' => $this->name,
@@ -25,7 +27,7 @@ class ScopeOFWorkResource extends JsonResource
             'duration' =>(int) $this->duration,
             'venue' =>(string) $this->venue,
             'created_at' => $this->created_at?  convert_date($this->created_at): '',
-            'quotations' => QuotationResource::collection($this->quotations()?->get()),
+            'services' => ServiceQuotationResource::collection($this->quotation->quotationServices->map->service->unique('parent_id')),
         ];
     }
 }
