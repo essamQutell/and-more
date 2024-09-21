@@ -13,7 +13,7 @@ class ServiceResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'main_service_id' => (int)$this->service?->id,
+            'parent_id' => (int)$this->service?->id,
             'main_service_name' => (string)$this->service?->name,
             'name_ar' => $this->name_ar,
             'name_en' => $this->name_en,
