@@ -76,4 +76,9 @@ class Project extends Model
         return $this->hasOne(Quotation::class, 'project_id');
     }
 
+    public function phases(): BelongsToMany
+    {
+        return $this->belongsToMany(Phase::class, 'project_flows', 'project_id', 'phase_id');
+    }
+
 }
