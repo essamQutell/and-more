@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CalculateServiceRequest extends FormRequest
+class CalculateServiceRequest extends ApiFormRequest
 {
     public function rules(): array
     {
@@ -12,7 +12,7 @@ class CalculateServiceRequest extends FormRequest
             'price' => ['required', 'numeric'],
             'quantity' => ['required', 'numeric'],
             'days' => ['required', 'numeric'],
-            'margin' => ['required', 'numeric'],
+            'margin' => ['nullable', 'numeric'],
         ];
     }
 }

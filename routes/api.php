@@ -80,6 +80,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('petty-cash/{pettyCash}/show', [PettyCashController::class,'show']);
     Route::get('petty-cash-category/{pettyCashCategory}/show', [PettyCashCategoryController::class,'show']);
 
-
+//admins = [
+//    0 => [1,2,3] //admin id
+//    1 => [2,4]//admin id
+//    2 => 3 //admin id
+//];
 
 });

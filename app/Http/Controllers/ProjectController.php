@@ -30,8 +30,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::paginate(10);
-        return self::successResponsePaginate(ProjectResource::collection($projects)->response()->getData(true)
-        );
+        return self::successResponsePaginate(ProjectResource::collection($projects)->response()->getData(true));
     }
 
     public function store(ProjectRequest $request)
