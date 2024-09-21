@@ -19,7 +19,7 @@ class PettyCashCategoryController extends Controller
 
         return self::successResponse(data: PettyCashCategoryResource::make($pettyCashCategory));
     }
-    public function store( StorePettyCashCategoryRequest $request): JsonResponse
+    public function store(StorePettyCashCategoryRequest $request): JsonResponse
     {
         //check total cost > and != expenses
         $pettyCashCategory= PettyCashCategory::create($request->validated());

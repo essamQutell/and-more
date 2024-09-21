@@ -2,11 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
 class StorePettyCashCategoryRequest extends ApiFormRequest
 {
-
     public function rules(): array
     {
         return [

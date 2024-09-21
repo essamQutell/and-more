@@ -12,19 +12,7 @@ class PettyCashCategory extends Model
 {
     use softDeletes;
     protected $table = 'petty_cash_categories';
-    protected $fillable = [
-        'petty_cash_id',
-        'supplier_id',
-        'category_id',
-        'item',
-        'attachment',
-        'invoice_number',
-        'invoice_value',
-        'city',
-        'responsible',
-        'notes',
-        'date',
-    ];
+    protected $guarded = [];
 
 
     protected $casts = [

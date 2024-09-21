@@ -9,19 +9,12 @@ class PettyCash extends Model
 {
     protected $table = 'petty_cashes';
 
-    protected $fillable = [
-        'project_id',
-        'total_cost',
-        'remaining',
-        'expenses'
-    ];
-
+    protected $guarded = [];
 
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class, 'project_id');
     }
-
 
 }
 

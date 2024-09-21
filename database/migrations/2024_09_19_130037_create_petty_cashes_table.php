@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('project_id')->references('id')->on('projects')
                 ->onDelete('cascade');
-            $table->double('total_cost');
+            $table->double('total_cost')->default(0);
             $table->double('remaining')->default(0);
             $table->double('expenses')->default(0);
             $table->timestamps();
