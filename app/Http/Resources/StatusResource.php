@@ -12,10 +12,11 @@ class StatusResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'type_id' => $this->type_id?->value,
             'name_ar' => $this->name_ar,
             'name_en' => $this->name_en,
             'name' => $this->name,
-            'type' => $this->type_id->label()
+            'type' => $this->type_id?->label()
         ];
     }
 }
