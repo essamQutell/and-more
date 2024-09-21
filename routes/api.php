@@ -49,6 +49,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('statuses/update/{status}', [StatusController::class,'update']);
 
     Route::apiResource('services', ServiceController::class);
+    Route::get('main-services', [ServiceController::class,'mainServices']);
     Route::get('sub-services/{service}', [ServiceController::class,'subServices']);
     Route::post('services/update/{service}', [ServiceController::class,'update']);
 

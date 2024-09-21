@@ -13,9 +13,16 @@ class ServiceController extends Controller
 
     public function index()
     {
-        $services = Service::whereParentId(null)->paginate(10);
+        $services = Service::paginate(10);
 
         return self::successResponsePaginate(data: ServiceResource::collection($services)->response()->getData(true));
+    }
+
+    public function mainServices()
+    {
+        $services = Service::whereParentId(null)->get();
+
+        return self::successResponse(data: ServiceResource::collection($services));
     }
 
     public function subServices(Service $service)
