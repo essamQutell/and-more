@@ -14,6 +14,7 @@ class PhaseResource extends JsonResource
         return [
             'id' => $this->id,
             'main_phase_id' => (int)$this->phase?->id,
+            'main_phase_name' => (string)$this->phase?->name,
             'name_ar' => $this->name_ar,
             'name_en' => $this->name_en,
             'name' => $this->name,

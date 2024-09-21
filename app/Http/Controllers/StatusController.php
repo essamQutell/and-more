@@ -8,6 +8,7 @@ use App\Http\Resources\SettingListResource;
 use App\Http\Resources\StatusResource;
 use App\Models\Status;
 use App\Traits\ResponseTrait;
+use Illuminate\Http\Request;
 
 class StatusController extends Controller
 {
@@ -17,9 +18,9 @@ class StatusController extends Controller
     {
         return self::successResponse(data: SettingListResource::collection(StatusEnum::cases()));
     }
-    public function index()
+    public function index(Request $request)
     {
-        $statuses = Status::paginate(10);
+        $statuses = Status::whereTypeId($request->type_id)->paginate(10);
         return self::successResponsePaginate(StatusResource::collection($statuses)->response()->getData(true));
     }
 
