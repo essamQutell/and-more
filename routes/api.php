@@ -13,7 +13,6 @@ use App\Http\Controllers\ProjectFlowController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\SettingListController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\SupplierTeamController;
@@ -50,6 +49,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::apiResource('services', ServiceController::class);
     Route::get('main-services', [ServiceController::class,'mainServices']);
+    Route::get('all-services', [ServiceController::class,'getServices']);
     Route::get('sub-services/{service}', [ServiceController::class,'subServices']);
     Route::post('services/update/{service}', [ServiceController::class,'update']);
 
@@ -57,7 +57,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('categories/update/{category}', [CategoryController::class,'update']);
 
     Route::apiResource('phases', PhaseController::class);
-    Route::get('phases/{phase}', [PhaseController::class,'subPhases']);
+    Route::get('all-phases', [PhaseController::class,'getPhases']);
+    Route::get('main-phases', [PhaseController::class,'mainPhases']);
+    Route::get('sub-phases/{phase}', [PhaseController::class,'subPhases']);
     Route::post('phases/update/{phase}', [PhaseController::class,'update']);
 
     Route::post('calculate/service/cost', [QuotationController::class,'calculateServiceCost']);

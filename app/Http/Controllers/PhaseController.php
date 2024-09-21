@@ -12,10 +12,17 @@ class PhaseController extends Controller
     use ResponseTrait;
     public function index()
     {
-        $phases = Phase::whereParentId(null)->paginate(10);
+        $phases = Phase::paginate(10);
 
         return self::successResponsePaginate(data: PhaseResource::collection($phases)->response()->getData(true));
     }
+
+    public function mainPhases()
+    {
+        $phases = Phase::whereParentId(null)->get();
+        return self::successResponse(data: PhaseResource::collection($phases));
+    }
+
 
     public function subPhases(Phase $phase)
     {

@@ -39,7 +39,9 @@ class ProjectController extends Controller
         $project = Project::create($projectData);
 
         $this->projectService->createDates($request->dates, $project->id);
-        $project->admins()->attach($request->admins);
+
+        $admins = collect($request->admins)->flatten()->unique()->toArray();
+        $project->admins()->attach($admins);
 
         return self::successResponse(__('application.added'), ProjectResource::make($project));
     }
@@ -52,7 +54,8 @@ class ProjectController extends Controller
         $project->dates()->delete();
         $this->projectService->createDates($request->dates, $project->id);
 
-        $project->admins()->sync($request->admins);
+        $admins = collect($request->admins)->flatten()->unique()->toArray();
+        $project->admins()->sync($admins);
 
         return self::successResponse(__('application.updated'), ProjectResource::make($project));
     }
