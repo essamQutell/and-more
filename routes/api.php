@@ -11,6 +11,7 @@ use App\Http\Controllers\PhaseController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectPhaseController;
 use App\Http\Controllers\QuotationController;
+use App\Http\Controllers\QuotationDealController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StatusController;
@@ -77,7 +78,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('supplier-teams/update/{supplierTeam}', [SupplierTeamController::class,'update']);
     Route::post('project-flow/phases/store', [ProjectPhaseController::class,'storePhases']);
-    Route::get('project/{project}/scope-work', [ProjectController::class,'getScopeOfWork']);
+    Route::get('project/scope-work/{project}', [ProjectController::class,'getScopeOfWork']);
     Route::get('project/phases/{project}', [ProjectPhaseController::class,'projectPhases']);
 
     Route::get('list/items', [PettyCashController::class,'listItems']);
@@ -91,10 +92,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('suppliers/{project}', [ProjectController::class,'suppliersByProject']);
     Route::get('projects/{supplier}', [ProjectController::class,'projectsBySupplier']);
 
-//admins = [
-//    0 => [1,2,3] //admin id
-//    1 => [2,4]//admin id
-//    2 => 3 //admin id
-//];
-
+    Route::post('store/deal', [QuotationDealController::class,'storeDeal']);
+    Route::get('deals/{project}', [QuotationDealController::class,'dealList']);
 });

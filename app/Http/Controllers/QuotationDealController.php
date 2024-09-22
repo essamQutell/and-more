@@ -17,11 +17,12 @@ use ResponseTrait;
         $quotationDealData = $request->validated();
         $project = Project::find($request->project_id);
         $quotationDealData['quotation_id'] = $project->quotation?->id;
+
         QuotationDeal::create($quotationDealData);
-        return  self::successResponse(data: __('application.added'));
+        return  self::successResponse(message: __('application.added'));
     }
 
-    public function getAllDeals(Request $request, Project $project)
+    public function dealList(Project $project)
     {
         return self::successResponse(data: QuotationDealResource::make($project));
     }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class QuotationService extends Model
 {
@@ -19,5 +20,10 @@ class QuotationService extends Model
     public function quotation(): BelongsTo
     {
         return $this->belongsTo(Quotation::class);
+    }
+
+    public function quotationDeal(): HasOne
+    {
+        return $this->hasOne(QuotationDeal::class);
     }
 }

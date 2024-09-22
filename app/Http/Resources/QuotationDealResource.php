@@ -13,8 +13,6 @@ class QuotationDealResource extends JsonResource
         return [
             'project_id' => $this->id,
             'project_name' => $this->name,
-            'serv'
-
         ];
     }
 }
