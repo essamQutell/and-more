@@ -11,6 +11,7 @@ use App\Http\Controllers\PhaseController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectPhaseController;
 use App\Http\Controllers\QuotationController;
+use App\Http\Controllers\QuotationDealController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StatusController;
@@ -85,9 +86,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('petty-cash/{pettyCash}/show', [PettyCashController::class,'show']);
     Route::get('all/petty-cash-categories/{pettyCash}', [PettyCashCategoryController::class,'show']);
 
-    //
     Route::get('all/suppliers/{project}', [ProjectController::class,'suppliersByProject']);
     Route::get('all/projects/{supplier}', [ProjectController::class,'projectsBySupplier']);
+
+    Route::post('scope-work/store/quotation-deal', [QuotationDealController::class,'storeDeal']);
+
 
 //admins = [
 //    0 => [1,2,3] //admin id
