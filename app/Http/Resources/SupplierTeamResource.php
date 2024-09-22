@@ -15,7 +15,6 @@ class SupplierTeamResource extends JsonResource
             'name' =>(string) $this->name,
             'email' =>(string) $this->email,
             'phone' =>(string) $this->phone,
-            'created_at' => $this->created_at ? convert_date($this->created_at) : '',
             'supplier' => SupplierResource::make($this->supplier),
         ];
     }
