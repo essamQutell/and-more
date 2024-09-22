@@ -10,6 +10,7 @@ use App\Http\Resources\SettingListResource;
 use App\Models\Project;
 use App\Services\ProjectService;
 use App\Traits\ResponseTrait;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
@@ -27,9 +28,9 @@ class ProjectController extends Controller
         return self::successResponse(data: SettingListResource::collection(ProjectType::cases()));
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::paginate(10);
+        $projects = Project::whereStatusId($request->status_id)->paginate(10);
         return self::successResponsePaginate(ProjectResource::collection($projects)->response()->getData(true));
     }
 
