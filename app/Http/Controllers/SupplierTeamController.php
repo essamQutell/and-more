@@ -6,6 +6,7 @@ use App\Http\Requests\Settings\PageRequest;
 use App\Http\Requests\SupplierTeam\StoreSupplierTeamRequest;
 use App\Http\Requests\SupplierTeam\UpdateSupplierTeamRequest;
 use App\Http\Resources\SupplierTeamResource;
+use App\Models\Supplier;
 use App\Models\SupplierTeam;
 use App\Traits\ResponseTrait;
 
@@ -45,5 +46,18 @@ class SupplierTeamController extends Controller
     {
         $supplierTeam->delete();
         return self::successResponse(message: __('application.deleted'));
+    }
+
+
+    public function supplierTeams(Supplier $supplier,PageRequest   $pageRequest)
+    {
+        $supplierTeams = $supplier->supplierTeams()->paginate($pageRequest->page_count);
+        return self::successResponsePaginate(data: SupplierTeamResource::collection($supplierTeams)->response()->getData(true));
+    }
+
+    public function supplierTeamsList(Supplier $supplier)
+    {
+        $supplierTeams = $supplier->supplierTeams()->get();
+        return self::successResponse(data: SupplierTeamResource::collection($supplierTeams));
     }
 }

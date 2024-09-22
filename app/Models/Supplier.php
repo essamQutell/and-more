@@ -24,4 +24,9 @@ class Supplier extends Model
     {
         return $this->hasManyThrough(Project::class, ProjectSupplier::class, 'supplier_id', 'id');
     }
+
+    public function supplierTeams(): HasMany
+    {
+        return $this->hasMany(SupplierTeam::class);
+    }
 }
