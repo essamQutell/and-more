@@ -81,7 +81,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('petty-cash/store', [PettyCashController::class,'store']);
     Route::post('petty-cash-category/store', [PettyCashCategoryController::class,'store']);
     Route::get('petty-cash/{pettyCash}/show', [PettyCashController::class,'show']);
-    Route::get('petty-cash-category/{pettyCashCategory}/show', [PettyCashCategoryController::class,'show']);
+    Route::get('all/petty-cash-categories/{pettyCash}', [PettyCashCategoryController::class,'show']);
 
     //
     Route::get('all/suppliers/{project}', [ProjectController::class,'suppliersByProject']);

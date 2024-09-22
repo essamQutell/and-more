@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Settings\PageRequest;
 use App\Http\Requests\StorePettyCashCategoryRequest;
 use App\Http\Requests\StorePettyCashRequest;
 use App\Http\Resources\PettyCashCategoryResource;
@@ -15,9 +16,9 @@ use Illuminate\Http\Request;
 class PettyCashCategoryController extends Controller
 {
     use ResponseTrait;
-    public  function show(Request $request, PettyCashCategory $pettyCashCategory): JsonResponse{
-
-        return self::successResponse(data: PettyCashCategoryResource::make($pettyCashCategory));
+    public  function show(PageRequest $request, PettyCash $pettyCash): JsonResponse{
+       $categories= $pettyCash->categories()->paginate($request->page_count);
+        return self::successResponsePaginate(data: PettyCashCategoryResource::collection($categories)->response()->getData(true));
     }
     public function store(StorePettyCashCategoryRequest $request): JsonResponse
     {
