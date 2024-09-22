@@ -8,6 +8,7 @@ use App\Http\Requests\Settings\PageRequest;
 use App\Http\Resources\ProjectResource;
 use App\Http\Resources\ScopeOFWorkResource;
 use App\Http\Resources\SettingListResource;
+use App\Http\Resources\SupplierResource;
 use App\Models\Project;
 use App\Models\Supplier;
 use App\Services\ProjectService;
@@ -30,9 +31,9 @@ class ProjectController extends Controller
         return self::successResponse(data: SettingListResource::collection(ProjectType::cases()));
     }
 
-    public function index(Request $request)
+    public function index(PageRequest $request)
     {
-        $projects = Project::whereStatusId($request->status_id)->paginate(10);
+        $projects = Project::whereStatusId($request->status_id)->paginate($request->page_count);
         return self::successResponsePaginate(ProjectResource::collection($projects)->response()->getData(true));
     }
 
@@ -73,7 +74,7 @@ class ProjectController extends Controller
     public function suppliersByProject(Project $project, PageRequest $pageRequest)
     {
         $suppliers = $project->suppliers()?->paginate($pageRequest->page_count);
-        return self::successResponsePaginate(data: ProjectResource::collection($suppliers)->response()->getData(true));
+        return self::successResponsePaginate(data: SupplierResource::collection($suppliers)->response()->getData(true));
     }
 
 //todo  projectsBySupplier
