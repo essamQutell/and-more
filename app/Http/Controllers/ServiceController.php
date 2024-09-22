@@ -26,11 +26,11 @@ class ServiceController extends Controller
         return self::successResponse(data: ServiceResource::collection($services));
     }
 
-    public function subServices(Service $service,PageRequest $pageRequest)
+    public function subServices(Service $service)
     {
-        $services = Service::whereParentId($service->id)->paginate($pageRequest->page_count);;
+        $services = Service::whereParentId($service->id)->get();
 
-        return self::successResponsePaginate(data: ServiceResource::collection($services)->response()->getData(true));
+        return self::successResponse(data: ServiceResource::collection($services));
     }
 
     public function store(ServiceRequest $request)
