@@ -225,6 +225,12 @@ return [
     'contract' => 'Contract',
     'quotation' => 'Quotation',
     'betty_cash' => 'Betty Cash',
+    'production' => 'Production',
+    'in_progress' => 'In Progress',
+    'update' => 'Update',
+    'complete' => 'Complete',
+    'cancel' => 'Cancel',
+    'pending' => 'Pending',
 
 
 

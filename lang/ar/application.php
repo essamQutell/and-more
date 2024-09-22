@@ -252,6 +252,13 @@ return [
     'contract' => 'عقد',
     'quotation' => 'عرض',
     'betty_cash' => 'بيتي كاش',
+    'production' => 'تحضير',
+    'in_progress' => 'جاري التحضير',
+    'update' => 'تحديث',
+    'complete' => 'تم',
+    'cancel' => 'الغاء',
+    'pending' => 'قيد الانتظار',
+
 
 
 ];

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\AttachmentEnum;
 use App\Enums\ItemEnum;
+use App\Enums\ProgressEnum;
 use App\Http\Requests\StorePettyCashRequest;
 use App\Http\Resources\PettyCashResource;
 use App\Http\Resources\SettingListResource;
@@ -36,5 +37,11 @@ class PettyCashController extends Controller
     public function listAttachments()
     {
         return self::successResponse(data: SettingListResource::collection(AttachmentEnum::cases()));
+    }
+
+
+    public function listProgress()
+    {
+        return self::successResponse(data: SettingListResource::collection(ProgressEnum::cases()));
     }
 }

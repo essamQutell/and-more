@@ -9,4 +9,9 @@ class QuotationDeal extends Model
 {
     protected $table = 'quotation_deals';
     protected $guarded = [];
+
+
+    protected $casts = [
+        'progress_id' => QuotationStatus::class
+    ];
 }
