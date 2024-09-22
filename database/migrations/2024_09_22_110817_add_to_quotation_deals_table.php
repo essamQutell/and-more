@@ -23,8 +23,7 @@ return new class extends Migration
             $table->text('notes')->nullable()->after('deal_status_id');
             $table->integer('progress_id')->nullable()->after('deal_status_id');
             $table->foreignId('project_id')->references('id')->on('projects')->after('deal_status_id')->onDelete('cascade');
-            $table->dropForeign(['quotation_id']);
-            $table->dropColumn('quotation_id');
+
 
 
         });

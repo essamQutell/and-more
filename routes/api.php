@@ -90,6 +90,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('all/projects/{supplier}', [ProjectController::class,'projectsBySupplier']);
 
     Route::post('scope-work/store/quotation-deal', [QuotationDealController::class,'storeDeal']);
+    Route::get('all/quotation-deal/{project}', [QuotationDealController::class,'getAllDeals']);
 
 
 //admins = [
