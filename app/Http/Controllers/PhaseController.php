@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PhaseRequest;
+use App\Http\Requests\Settings\PageRequest;
 use App\Http\Resources\PhaseResource;
 use App\Models\Phase;
 use App\Traits\ResponseTrait;
@@ -10,9 +11,9 @@ use App\Traits\ResponseTrait;
 class PhaseController extends Controller
 {
     use ResponseTrait;
-    public function index()
+    public function index(PageRequest $pageRequest)
     {
-        $phases = Phase::paginate(10);
+        $phases = Phase::paginate($pageRequest->page_count);;
 
         return self::successResponsePaginate(data: PhaseResource::collection($phases)->response()->getData(true));
     }
@@ -24,9 +25,9 @@ class PhaseController extends Controller
     }
 
 
-    public function subPhases(Phase $phase)
+    public function subPhases(Phase $phase,PageRequest $pageRequest)
     {
-        $phases = Phase::whereParentId($phase->id)->paginate(10);
+        $phases = Phase::whereParentId($phase->id)->paginate($pageRequest->page_count);;
         return self::successResponsePaginate(data: PhaseResource::collection($phases)->response()->getData(true));
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\StatusEnum;
+use App\Http\Requests\Settings\PageRequest;
 use App\Http\Requests\StatusRequest;
 use App\Http\Resources\SettingListResource;
 use App\Http\Resources\StatusResource;
@@ -18,9 +19,9 @@ class StatusController extends Controller
     {
         return self::successResponse(data: SettingListResource::collection(StatusEnum::cases()));
     }
-    public function index(Request $request)
+    public function index(Request $request,PageRequest $pageRequest)
     {
-        $statuses = Status::whereTypeId($request->type_id)->paginate(10);
+        $statuses = Status::whereTypeId($request->type_id)->paginate($pageRequest->page_count);
         return self::successResponsePaginate(StatusResource::collection($statuses)->response()->getData(true));
     }
 

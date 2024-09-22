@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Settings\PageRequest;
 use App\Http\Requests\SupplierTeam\StoreSupplierTeamRequest;
 use App\Http\Requests\SupplierTeam\UpdateSupplierTeamRequest;
 use App\Http\Resources\SupplierTeamResource;
@@ -13,9 +14,9 @@ class SupplierTeamController extends Controller
     use ResponseTrait;
 
     //todo: add list of suppliers team
-    public function index()
+    public function index(PageRequest $pageRequest)
     {
-        $supplierTeams = SupplierTeam::paginate(10);
+        $supplierTeams = SupplierTeam::paginate($pageRequest->page_count);;
         return self::successResponsePaginate(data: SupplierTeamResource::collection( $supplierTeams)->response()->getData(true));
     }
 

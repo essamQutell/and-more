@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
+use App\Http\Requests\Settings\PageRequest;
 use App\Http\Resources\RoleAdminResource;
 use App\Http\Resources\RoleResource;
 use App\Models\Role;
@@ -15,9 +16,9 @@ class RoleController extends Controller
 {
     use ResponseTrait;
 
-    public function index(): JsonResponse
+    public function index(PageRequest $pageRequest): JsonResponse
     {
-        $roles = Role::WithoutRoleSuperAdmin()->paginate(10);
+        $roles = Role::WithoutRoleSuperAdmin()->paginate($pageRequest->page_count);;
 
         return self::successResponsePaginate(data: RoleResource::collection($roles)->response()->getData(true));
     }

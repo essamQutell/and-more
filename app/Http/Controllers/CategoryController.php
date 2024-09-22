@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\Settings\PageRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use App\Traits\ResponseTrait;
@@ -10,9 +11,9 @@ use App\Traits\ResponseTrait;
 class CategoryController extends Controller
 {
     use ResponseTrait;
-    public function index()
+    public function index(PageRequest $pageRequest)
     {
-        $categories = Category::paginate(10);
+        $categories = Category::paginate($pageRequest->page_count);;
 
         return self::successResponsePaginate(data: CategoryResource::collection($categories)->response()->getData(true));
     }

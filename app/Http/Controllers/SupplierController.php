@@ -15,9 +15,9 @@ class SupplierController extends Controller
 {
     use ResponseTrait;
 
-    public function index(): JsonResponse
+    public function index(PageRequest $pageRequest): JsonResponse
     {
-        $suppliers = Supplier::paginate(10);
+        $suppliers = Supplier::paginate($pageRequest->page_count);;
         return self::successResponsePaginate(data: SupplierResource::collection($suppliers)->response()->getData(true));
     }
 

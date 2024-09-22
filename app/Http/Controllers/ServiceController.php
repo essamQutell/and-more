@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ServiceRequest;
+use App\Http\Requests\Settings\PageRequest;
 use App\Http\Resources\ServiceResource;
 use App\Models\Service;
 use App\Traits\ResponseTrait;
@@ -11,9 +12,9 @@ class ServiceController extends Controller
 {
     use ResponseTrait;
 
-    public function index()
+    public function index(PageRequest $pageRequest)
     {
-        $services = Service::paginate(10);
+        $services = Service::paginate($pageRequest->page_count);;
 
         return self::successResponsePaginate(data: ServiceResource::collection($services)->response()->getData(true));
     }
@@ -25,9 +26,9 @@ class ServiceController extends Controller
         return self::successResponse(data: ServiceResource::collection($services));
     }
 
-    public function subServices(Service $service)
+    public function subServices(Service $service,PageRequest $pageRequest)
     {
-        $services = Service::whereParentId($service->id)->paginate(10);
+        $services = Service::whereParentId($service->id)->paginate($pageRequest->page_count);;
 
         return self::successResponsePaginate(data: ServiceResource::collection($services)->response()->getData(true));
     }

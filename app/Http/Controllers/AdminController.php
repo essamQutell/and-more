@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AdminRequest;
+use App\Http\Requests\Settings\PageRequest;
 use App\Http\Resources\AdminResource;
 use App\Models\Admin;
 use App\Models\Role;
@@ -12,17 +13,17 @@ use Illuminate\Http\JsonResponse;
 class AdminController extends Controller
 {
     use ResponseTrait;
-    public function index()
+    public function index( PageRequest $pageRequest)
     {
-        $admins = Admin::withoutSuperAdmin()->paginate(10);
+        $admins = Admin::withoutSuperAdmin()->paginate($pageRequest->page_count);
         return self::successResponsePaginate(data: AdminResource::collection($admins)->response()->getData(true));
     }
 
-    public function adminsByRole(Role $role)
+    public function adminsByRole(Role $role,PageRequest $pageRequest)
     {
         $admins = Admin::whereHas('roles', function ($query) use ($role) {
             $query->whereId($role->id);
-        })->paginate(10);
+        })->paginate($pageRequest->page_count);;
         return self::successResponsePaginate(data: AdminResource::collection($admins)->response()->getData(true));
     }
 
