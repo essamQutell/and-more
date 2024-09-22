@@ -4,6 +4,16 @@ namespace App\Services;
 
 class CalculateCostService
 {
+
+    public function calculatePettyCash($project,$pettyCashCategory): void
+    {
+        $totalCost = $project->pettyCash->total_cost;
+        $expenses = $pettyCashCategory->pettyCash->expenses + $pettyCashCategory->invoice_value;
+        $pettyCashCategory->pettyCash->update([
+            'expenses' => $expenses,
+            'remaining' => $totalCost - $expenses,
+        ]);
+    }
     public function calculateSingleCost($data): array
     {
         $cost = $this->calculateCost($data['price'], $data['quantity'], $data['days']);

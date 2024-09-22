@@ -10,6 +10,7 @@ use App\Http\Resources\AdminResource;
 use App\Http\Resources\QuotationResource;
 use App\Http\Resources\ServiceCostResource;
 use App\Http\Resources\ServicesCostResource;
+use App\Models\PettyCash;
 use App\Models\Project;
 use App\Models\Quotation;
 use App\Models\QuotationService;
@@ -26,7 +27,7 @@ class QuotationController extends Controller
 
     private ProjectService $projectService;
 
-    public function __construct(CalculateCostService $calculateCostService,ProjectService $projectService)
+    public function __construct(CalculateCostService $calculateCostService, ProjectService $projectService)
     {
         $this->calculateCostService = $calculateCostService;
         $this->projectService = $projectService;
@@ -49,9 +50,8 @@ class QuotationController extends Controller
     {
         $quotation = $this->projectService->createQuotation($request);
         $this->projectService->createQuotationServices($quotation->id, $request->services);
-
+        PettyCash::create(['project_id' => $request->project_id]);
         return self::successResponse(__('application.added'), QuotationResource::make($quotation));
-
     }
 
     public function quotationDetails(Project $project)

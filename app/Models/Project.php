@@ -24,7 +24,6 @@ class Project extends Model
     protected $guarded = [];
 
     protected array $dates = ['deleted_at'];
-    protected $fillable = ['name', 'description', 'type_id', 'user_id', 'status_id', 'deal_status_id'];
 
     protected $casts = [
         'type_id' => ProjectType::class
@@ -44,7 +43,6 @@ class Project extends Model
     {
         return $this->dates()?->whereType($type)->first();
     }
-
 
     public function user(): BelongsTo
     {
@@ -84,6 +82,11 @@ class Project extends Model
     {
         return $this->belongsToMany(Supplier::class, 'project_suppliers', 'project_id',
             'supplier_id');
+    }
+
+    public function pettyCash(): HasOne
+    {
+        return $this->hasOne(PettyCash::class, 'project_id');
     }
 
 }

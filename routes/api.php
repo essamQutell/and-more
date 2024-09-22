@@ -11,7 +11,6 @@ use App\Http\Controllers\PhaseController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectPhaseController;
 use App\Http\Controllers\QuotationController;
-use App\Http\Controllers\QuotationDealController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StatusController;
@@ -71,27 +70,25 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('quotation/status/{quotation}', [QuotationController::class,'changeStatus']);
 
     Route::apiResource('suppliers', SupplierController::class);
-    Route::post('suppliers/{supplier}/update', [SupplierController::class, 'update']);
+    Route::post('suppliers/update/{supplier}', [SupplierController::class, 'update']);
     Route::apiResource('supplier-teams', SupplierTeamController::class)->parameters([ 'supplier-teams' => 'supplierTeam']);
-    Route::get('all/supplier-teams/{supplier}', [SupplierTeamController::class,'supplierTeams']);
+    Route::get('supplier-teams/{supplier}', [SupplierTeamController::class,'supplierTeams']);
     Route::get('list/supplier-teams/{supplier}', [SupplierTeamController::class,'supplierTeamsList']);
-    Route::post('supplier-teams/{supplierTeam}/update', [SupplierTeamController::class,'update']);
+
+    Route::post('supplier-teams/update/{supplierTeam}', [SupplierTeamController::class,'update']);
     Route::post('project-flow/phases/store', [ProjectPhaseController::class,'storePhases']);
-    Route::get('project/phases/{project}', [ProjectPhaseController::class,'projectPhases']);
     Route::get('project/{project}/scope-work', [ProjectController::class,'getScopeOfWork']);
+    Route::get('project/phases/{project}', [ProjectPhaseController::class,'projectPhases']);
+
     Route::get('list/items', [PettyCashController::class,'listItems']);
     Route::get('list/attachments', [PettyCashController::class,'listAttachments']);
-    Route::post('petty-cash/store', [PettyCashController::class,'store']);
-    Route::post('petty-cash-category/store', [PettyCashCategoryController::class,'store']);
-    Route::get('petty-cash/{pettyCash}/show', [PettyCashController::class,'show']);
-    Route::get('all/petty-cash-categories/{pettyCash}', [PettyCashCategoryController::class,'show']);
+    Route::post('petty-cash/category/store', [PettyCashCategoryController::class,'store']);
+    Route::get('petty-cash/show/{pettyCash}', [PettyCashController::class,'show']);
+    Route::post('petty-cash/update/{project}', [PettyCashController::class,'update']);
+    Route::get('petty-cash/categories/{project}', [PettyCashCategoryController::class,'show']);
 
-    Route::get('all/suppliers/{project}', [ProjectController::class,'suppliersByProject']);
-    Route::get('all/projects/{supplier}', [ProjectController::class,'projectsBySupplier']);
-
-    Route::post('scope-work/store/quotation-deal', [QuotationDealController::class,'storeDeal']);
-    Route::get('all/quotation-deal/{project}', [QuotationDealController::class,'getAllDeals']);
-
+    Route::get('suppliers/{project}', [ProjectController::class,'suppliersByProject']);
+    Route::get('projects/{supplier}', [ProjectController::class,'projectsBySupplier']);
 
 //admins = [
 //    0 => [1,2,3] //admin id

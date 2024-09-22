@@ -7,11 +7,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class PettyCashResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
         return [
@@ -19,8 +14,6 @@ class PettyCashResource extends JsonResource
             'total_cost' => (double)$this->total_cost,
             'remaining' => (double)$this->remaining,
             'expenses' => (double)$this->expenses,
-            'created_at' => $this->created_at ? convert_date($this->created_at) : $this->created_at
-
         ];
     }
 }
