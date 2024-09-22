@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Enums\ProjectType;
 use App\Http\Requests\ProjectRequest;
+use App\Http\Requests\Settings\PageRequest;
 use App\Http\Resources\ProjectResource;
 use App\Http\Resources\ScopeOFWorkResource;
 use App\Http\Resources\SettingListResource;
 use App\Models\Project;
+use App\Models\Supplier;
 use App\Services\ProjectService;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\Request;
@@ -66,5 +68,18 @@ class ProjectController extends Controller
     public function getScopeOfWork(Project $project)
     {
         return self::successResponse(data: ScopeOFWorkResource::make($project));
+    }
+    //todo suppliersByProject
+    public function suppliersByProject(Project $project, PageRequest $pageRequest)
+    {
+        $suppliers = $project->suppliers()?->paginate($pageRequest->page_count);
+        return self::successResponsePaginate(data: ProjectResource::collection($suppliers)->response()->getData(true));
+    }
+
+//todo  projectsBySupplier
+    public function projectsBySupplier(Supplier $supplier, PageRequest $pageRequest)
+    {
+        $projects = $supplier->projects()?->paginate($pageRequest->page_count);
+        return self::successResponsePaginate(data: ProjectResource::collection($projects)->response()->getData(true));
     }
 }

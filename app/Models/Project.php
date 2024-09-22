@@ -80,5 +80,10 @@ class Project extends Model
     {
         return $this->belongsToMany(Phase::class, 'project_phases', 'project_id', 'phase_id');
     }
+    public function suppliers():BelongsToMany
+    {
+        return $this->belongsToMany(Supplier::class, 'project_suppliers', 'project_id',
+            'supplier_id');
+    }
 
 }
