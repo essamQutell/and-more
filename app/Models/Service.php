@@ -20,6 +20,8 @@ class Service extends Model
 
     protected array $dates = ['deleted_at'];
 
+    protected $with = ['services'];
+
     public function name(): Attribute
     {
         return Attribute::make(
