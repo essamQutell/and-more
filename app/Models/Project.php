@@ -78,7 +78,7 @@ class Project extends Model
 
     public function phases(): BelongsToMany
     {
-        return $this->belongsToMany(Phase::class, 'project_flows', 'project_id', 'phase_id');
+        return $this->belongsToMany(Phase::class, 'project_phases', 'project_id', 'phase_id');
     }
 
 }

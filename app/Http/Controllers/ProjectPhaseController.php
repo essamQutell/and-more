@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreProjectFlowRequest;
+use App\Http\Requests\StoreProjectPhaseRequest;
 use App\Models\Project;
-use App\Models\ProjectFlow;
+use App\Models\ProjectPhase;
 use App\Traits\ResponseTrait;
 
-class ProjectFlowController extends Controller
+class ProjectPhaseController extends Controller
 {
     use ResponseTrait;
 
@@ -18,7 +18,7 @@ class ProjectFlowController extends Controller
         return self::successResponse(data: $project->phases);
     }
 
-    public function storePhases(StoreProjectFlowRequest $request)
+    public function storePhases(StoreProjectPhaseRequest $request)
     {
         $project = Project::find($request->project_id);
         $project->phases()->sync($request->phases);

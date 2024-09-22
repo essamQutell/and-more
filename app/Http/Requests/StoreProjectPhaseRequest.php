@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProjectFlowRequest extends ApiFormRequest
+class StoreProjectPhaseRequest extends ApiFormRequest
 {
 
     public function rules(): array
