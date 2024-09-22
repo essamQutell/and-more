@@ -20,6 +20,11 @@ class QuotationDeal extends Model
         return $this->belongsTo(Quotation::class, 'quotation_id');
     }
 
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
+
     public function quotationService(): BelongsTo
     {
         return $this->belongsTo(QuotationService::class, 'quotation_service_id');

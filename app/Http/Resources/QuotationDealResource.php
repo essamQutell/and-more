@@ -11,8 +11,8 @@ class QuotationDealResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'project_id' => $this->id,
-            'project_name' => $this->name,
+            'id' => $this->id,
+            'project_name' => $this->project?->name,
         ];
     }
 }

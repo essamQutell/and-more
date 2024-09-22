@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 
 class QuotationDealController extends Controller
 {
-use ResponseTrait;
+    use ResponseTrait;
+
     public function storeDeal(StoreQuotationDealRequest $request)
     {
         $quotationDealData = $request->validated();
@@ -19,7 +20,7 @@ use ResponseTrait;
         $quotationDealData['quotation_id'] = $project->quotation?->id;
 
         QuotationDeal::create($quotationDealData);
-        return  self::successResponse(message: __('application.added'));
+        return self::successResponse(message: __('application.added'));
     }
 
     public function dealList(Project $project)
