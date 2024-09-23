@@ -37,6 +37,11 @@ class ProjectController extends Controller
         return self::successResponsePaginate(ProjectResource::collection($projects)->response()->getData(true));
     }
 
+    public function show(Project $project)
+    {
+        return self::successResponse(data: ProjectResource::make($project));
+    }
+
     public function store(ProjectRequest $request)
     {
         $projectData = $request->safe()->except('admins', 'dates');
