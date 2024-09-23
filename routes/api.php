@@ -10,6 +10,7 @@ use App\Http\Controllers\PettyCashController;
 use App\Http\Controllers\PhaseController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectPhaseController;
+use App\Http\Controllers\ProjectSupplierController;
 use App\Http\Controllers\QuotationController;
 use App\Http\Controllers\QuotationDealController;
 use App\Http\Controllers\RoleController;
@@ -102,4 +103,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::post('store/deal', [QuotationDealController::class,'storeDeal']);
     Route::get('deals/{project}', [QuotationDealController::class,'dealList']);
+    Route::post('store/project-supplier', [ProjectSupplierController::class,'store']);
 });

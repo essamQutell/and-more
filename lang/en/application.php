@@ -231,6 +231,8 @@ return [
     'complete' => 'Complete',
     'cancel' => 'Cancel',
     'pending' => 'Pending',
+    'completed' => 'Completed',
+
 
 
 

@@ -258,6 +258,7 @@ return [
     'complete' => 'تم',
     'cancel' => 'الغاء',
     'pending' => 'قيد الانتظار',
+    'completed' => 'مكتمل',
 
 
 
