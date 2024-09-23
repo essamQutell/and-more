@@ -20,7 +20,7 @@ class CalculateCostService
         $salesPrice = $this->calculateSalesPrice($data['price'], $data['margin']);
         $totalSales = $this->calculateTotalSales($data['price'], $data['margin'], $data['quantity'], $data['days']);
         $vat = $this->calculateVat($totalSales);
-        $margin = $this->calculateMargin($cost,$totalSales);
+        $margin = $this->calculateMargin($totalSales,$cost);
 
         return [
             'cost' => $cost,
