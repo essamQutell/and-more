@@ -36,11 +36,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 
     Route::get('admins/list',[AdminController::class, 'admins']);
-    Route::get('roles/list',[AdminController::class, 'roles']);
-    Route::get('statuses/list',[AdminController::class, 'statuses']);
-    Route::get('services/list',[AdminController::class, 'services']);
-    Route::get('categories/list',[AdminController::class, 'categories']);
-    Route::get('suppliers/list',[AdminController::class, 'suppliers']);
+    Route::get('roles/list',[RoleController::class, 'roles']);
+    Route::get('statuses/list',[StatusController::class, 'statuses']);
+    Route::get('services/list',[ServiceController::class, 'services']);
+    Route::get('categories/list',[CategoryController::class, 'categories']);
+    Route::get('suppliers/list',[SupplierController::class, 'suppliers']);
 
     Route::apiResource('admins', AdminController::class);
     Route::get('admins/{role}/role', [AdminController::class, 'adminsByRole']);
