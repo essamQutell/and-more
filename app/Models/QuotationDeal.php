@@ -25,9 +25,5 @@ class QuotationDeal extends Model
         return $this->belongsTo(Project::class, 'project_id');
     }
 
-    public function quotationService(): BelongsTo
-    {
-        return $this->belongsTo(QuotationService::class, 'quotation_service_id');
-    }
 
 }
