@@ -44,5 +44,10 @@ class Service extends Model
         return $this->hasMany(QuotationService::class);
     }
 
+    public function quotationDeals(): HasMany
+    {
+        return $this->hasMany(QuotationDeal::class);
+    }
+
 
 }

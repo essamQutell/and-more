@@ -2,17 +2,19 @@
 
 namespace App\Http\Resources;
 
+use App\Models\QuotationDeal;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-/** @mixin \App\Models\QuotationDeal */
+/** @mixin QuotationDeal */
 class QuotationDealResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,
-            'project_name' => $this->project?->name,
+            'project_name' => $this->name,
+            'services' => ServiceQuotationDealResource::collection($this->quotation->quotationServices->map->service->unique('parent_id')),
         ];
     }
 }
