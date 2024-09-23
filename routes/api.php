@@ -105,4 +105,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('store/deal', [QuotationDealController::class, 'storeDeal']);
     Route::get('deals/{project}', [QuotationDealController::class, 'dealList']);
     Route::post('store/project-supplier', [ProjectSupplierController::class,'store']);
+    Route::get('get/project-supplier/{project}', [ProjectSupplierController::class,'getProjectSupplier']);
 });

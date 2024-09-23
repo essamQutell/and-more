@@ -89,4 +89,11 @@ class Project extends Model
         return $this->hasOne(PettyCash::class, 'project_id');
     }
 
+
+    public function projectSuppliers(): HasMany
+    {
+
+        return $this->hasMany(ProjectSupplier::class, 'project_id');
+    }
+
 }

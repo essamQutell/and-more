@@ -10,7 +10,7 @@ class StoreQuotationDealRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'quotation_service_id' => ['required','exists:quotation_services,id'],
+            'service_id' => ['required','exists:services,id'],
             'project_id' => ['required','exists:projects,id'],
             'supplier_id' => ['required','exists:suppliers,id'],
             'supplier_team_id' => ['required','exists:supplier_teams,id'],
