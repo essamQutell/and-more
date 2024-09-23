@@ -25,6 +25,12 @@ class StatusController extends Controller
         return self::successResponsePaginate(StatusResource::collection($statuses)->response()->getData(true));
     }
 
+    public function statuses()
+    {
+        $statuses = Status::all();
+        return self::successResponse(data: StatusResource::collection($statuses));
+    }
+
     public function store(StatusRequest $request)
     {
         $status = Status::create($request->validated());

@@ -19,6 +19,12 @@ class ServiceController extends Controller
         return self::successResponsePaginate(data: ServiceResource::collection($services)->response()->getData(true));
     }
 
+    public function services()
+    {
+        $services = Service::get();
+        return self::successResponse(data: ServiceResource::collection($services));
+    }
+
     public function mainServices()
     {
         $services = Service::whereParentId(null)->get();

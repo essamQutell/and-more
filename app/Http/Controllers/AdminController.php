@@ -19,6 +19,12 @@ class AdminController extends Controller
         return self::successResponsePaginate(data: AdminResource::collection($admins)->response()->getData(true));
     }
 
+    public function admins()
+    {
+        $admins = Admin::withoutSuperAdmin()->get();
+        return self::successResponse(data: AdminResource::collection($admins));
+    }
+
     public function adminsByRole(Role $role,PageRequest $pageRequest)
     {
         $admins = Admin::whereHas('roles', function ($query) use ($role) {

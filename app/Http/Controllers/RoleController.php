@@ -23,6 +23,12 @@ class RoleController extends Controller
         return self::successResponsePaginate(data: RoleResource::collection($roles)->response()->getData(true));
     }
 
+    public function roles()
+    {
+        $roles = Role::WithoutRoleSuperAdmin()->get();
+        return self::successResponse(data: RoleResource::collection($roles));
+    }
+
     public function rolesWithAdmins(): JsonResponse
     {
         return self::successResponse(data: RoleAdminResource::collection(Role::WithoutRoleSuperAdmin()->get()));

@@ -21,6 +21,12 @@ class SupplierController extends Controller
         return self::successResponsePaginate(data: SupplierResource::collection($suppliers)->response()->getData(true));
     }
 
+    public function suppliers()
+    {
+        $suppliers = Supplier::get();
+        return self::successResponse(data: SupplierResource::collection($suppliers));
+    }
+
     public function store(StoreSupplierRequest $request)
     {
         $supplier = Supplier::create($request->validated());

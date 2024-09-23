@@ -18,6 +18,12 @@ class CategoryController extends Controller
         return self::successResponsePaginate(data: CategoryResource::collection($categories)->response()->getData(true));
     }
 
+    public function categories()
+    {
+        $categories = Category::all();
+        return self::successResponse(data: CategoryResource::collection($categories));
+    }
+
     public function store(CategoryRequest $request)
     {
         $category = Category::create($request->validated());

@@ -34,6 +34,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('logout', [AuthController::class, 'logout']);
         Route::get('profile', [AuthController::class, 'profile']);
     });
+
+    Route::get('admins/list',[AdminController::class, 'admins']);
+    Route::get('roles/list',[AdminController::class, 'roles']);
+    Route::get('statuses/list',[AdminController::class, 'statuses']);
+    Route::get('services/list',[AdminController::class, 'services']);
+    Route::get('categories/list',[AdminController::class, 'categories']);
+    Route::get('suppliers/list',[AdminController::class, 'suppliers']);
+
     Route::apiResource('admins', AdminController::class);
     Route::get('admins/{role}/role', [AdminController::class, 'adminsByRole']);
     Route::post('admins/update/{admin}', [AdminController::class, 'update']);
