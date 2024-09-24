@@ -12,6 +12,9 @@ class ServiceQuotationResource extends JsonResource
         return [
             'id' => $this->quotationServices()->first()?->id,
             'name' => $this->service?->name,
+            'main_service_cost' =>  $this->calculateMainServiceCost(),
+            'main_service_sales' =>  $this->calculateMainServiceSales(),
+            'main_service_profit' =>  $this->calculateMainServiceProfit(),
             'sub_services' => SubServiceQuotationResource::collection(
                 $this->service?->services()->whereHas('quotationServices')->get()
             ),

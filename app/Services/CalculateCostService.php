@@ -100,7 +100,7 @@ class CalculateCostService
         return $price * $quantity * $days;
     }
 
-    private function calculateTotalSales($price, $marginPercentage, $quantity, $days): float|int
+    public function calculateTotalSales($price, $marginPercentage, $quantity, $days): float|int
     {
         return $this->calculateSalesPrice($price, $marginPercentage) * $quantity * $days;
     }
@@ -110,7 +110,7 @@ class CalculateCostService
         $margin = $price * ($marginPercentage / 100);
         return $price + $margin;
     }
-    private function calculateMargin($cost,$totalSales)
+    public function calculateMargin($cost,$totalSales)
     {
         return $cost - $totalSales;
     }
