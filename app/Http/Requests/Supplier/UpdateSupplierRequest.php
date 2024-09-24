@@ -12,12 +12,9 @@ class UpdateSupplierRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'name' => ['nullable', 'string', 'max:255', Rule::unique('suppliers')->ignore($this->supplier->id)
-                ->whereNull('deleted_at')],
-            'email' => ['nullable', 'string', 'email', 'max:255', Rule::unique('suppliers')->ignore($this->supplier->id)
-                ->whereNull('deleted_at')],
-            'phone' => ['nullable', 'string', 'max:255', Rule::unique('suppliers')->ignore($this->supplier->id)
-                ->whereNull('deleted_at')],
+            'name' => ['nullable', 'string', 'max:255', Rule::unique('suppliers')->ignore($this->supplier->id)],
+            'email' => ['nullable', 'string', 'email', 'max:255', Rule::unique('suppliers')->ignore($this->supplier->id)],
+            'phone' => ['nullable', 'string', 'max:255', Rule::unique('suppliers')->ignore($this->supplier->id)],
             'address' => ['nullable', 'string', 'max:255'],
             'balance' => ['nullable', 'numeric'],
         ];

@@ -16,23 +16,20 @@ class UpdateSupplierTeamRequest extends ApiFormRequest
                 'nullable',
                 'string',
                 'max:255',
-                $this->supplier_team ? Rule::unique('supplier_teams','name')->ignore($this->supplier_team->id)
-                    : Rule::unique('supplier_teams')
+                Rule::unique('supplier_teams','name')->ignore($this->supplierTeam->id)
             ],
             'email' => [
                 'nullable',
                 'string',
                 'email',
                 'max:255',
-                $this->supplier_team ? Rule::unique('supplier_teams','email')->ignore($this->supplier_team->id)
-                    : Rule::unique('supplier_teams','email')
+                Rule::unique('supplier_teams','name')->ignore($this->supplierTeam->id)
             ],
             'phone' => [
                 'nullable',
                 'string',
                 'max:255',
-                $this->supplier_team ? Rule::unique('supplier_teams','phone')->ignore($this->supplier_team->id)
-                    : Rule::unique('supplier_teams','phone')
+                Rule::unique('supplier_teams','name')->ignore($this->supplierTeam->id)
             ],
         ];
     }
