@@ -259,7 +259,9 @@ return [
     'cancel' => 'الغاء',
     'pending' => 'قيد الانتظار',
     'completed' => 'مكتمل',
-
+    'not_started' => 'لم يبدأ',
+    'ontrack'=>'متابع',
+    'critical'=>'مهم',
 
 
 ];

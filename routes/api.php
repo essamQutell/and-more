@@ -42,6 +42,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('services/list', [ServiceController::class, 'services']);
     Route::get('categories/list', [CategoryController::class, 'categories']);
     Route::get('suppliers/list', [SupplierController::class, 'suppliers']);
+    Route::get('quotations/list', [QuotationController::class, 'quotationStatusList']);
+    Route::get('quotation-deal/status/list', [QuotationDealController::class, 'dealStatusCheckList']);
+    Route::get('quotations/status/list', [QuotationDealController::class, 'statusCheckList']);
 
     Route::apiResource('admins', AdminController::class);
     Route::get('admins/{role}/role', [AdminController::class, 'adminsByRole']);

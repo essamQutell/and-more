@@ -37,6 +37,9 @@ class AdminController extends Controller
     {
         $adminData = $request->safe()->except('role_id', 'password');
         $adminData['password'] = bcrypt($request->password);
+        if ($request->hasFile('image')) {
+            $adminData['image'] = $request->file('image')->store('admins', 'public_uploads');
+        }
         $admin = Admin::create($adminData);
         $admin->syncRoles([$request->role_id]);
 

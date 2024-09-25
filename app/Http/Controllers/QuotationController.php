@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\QuotationStatusEnum;
 use App\Enums\StatusEnum;
 use App\Http\Requests\CalculateServiceRequest;
 use App\Http\Requests\CalculateServicesRequest;
@@ -10,6 +11,7 @@ use App\Http\Resources\AdminResource;
 use App\Http\Resources\QuotationResource;
 use App\Http\Resources\ServiceCostResource;
 use App\Http\Resources\ServicesCostResource;
+use App\Http\Resources\SettingListResource;
 use App\Models\PettyCash;
 use App\Models\Project;
 use App\Models\Quotation;
@@ -17,6 +19,7 @@ use App\Models\QuotationService;
 use App\Services\CalculateCostService;
 use App\Services\ProjectService;
 use App\Traits\ResponseTrait;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class QuotationController extends Controller
@@ -79,5 +82,10 @@ class QuotationController extends Controller
         $quotation->delete();
 
         return response()->json();
+    }
+
+    public function quotationStatusList(): JsonResponse
+    {
+        return self::successResponse(data: SettingListResource::collection(QuotationStatusEnum::cases()));
     }
 }

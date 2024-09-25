@@ -232,6 +232,9 @@ return [
     'cancel' => 'Cancel',
     'pending' => 'Pending',
     'completed' => 'Completed',
+    'not_started' => 'Not Started',
+    'ontrack'=>'On Track',
+    'critical'=>'Critical',
 
 
 

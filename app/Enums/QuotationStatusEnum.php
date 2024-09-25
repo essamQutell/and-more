@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum QuotationStatus : int
+enum QuotationStatusEnum : int
 {
     case pending = 1;
     case approved = 2;

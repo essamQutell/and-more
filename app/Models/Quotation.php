@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\QuotationStatus;
+use App\Enums\QuotationStatusEnum;
 use App\Enums\StatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,7 +20,7 @@ class Quotation extends Model
     protected $with =['project'];
 
     protected $casts = [
-        'status_id' => QuotationStatus::class
+        'status_id' => QuotationStatusEnum::class
     ];
 
     public function project(): BelongsTo
