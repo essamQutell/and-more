@@ -28,7 +28,7 @@ class ProjectSupplierResource extends JsonResource
             'paid'=>(double)$this->paid,
             'discount' =>(double) $this->discount,
             'actual_cost' =>(double) $this->actual_cost,
-            'responsible'=>(string)$this->responsible->admin->name,
+            'responsible'=>(string)$this->team->admin->name,
             'attachment' => $this->attachment_id?->label(),
             'notes'=>(string)$this->notes,
         ];

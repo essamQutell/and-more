@@ -38,8 +38,7 @@ class ProjectSupplier extends Model
         return $this->belongsTo(Category::class);
     }
 
-
-    public function responsible():BelongsTo
+    public function team():BelongsTo
     {
         return $this->belongsTo(ProjectAdmin::class,'project_team_id');
     }

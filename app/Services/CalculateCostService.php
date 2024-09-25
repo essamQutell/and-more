@@ -35,8 +35,10 @@ class CalculateCostService
     {
         $result = [
             'total_cost' => 0,
+            'total_cost_percentage' => 0,
             'total_sales' => 0,
             'total_margin' => 0,
+            'total_margin_percentage' => 0,
             'vat' => 0,
             'agency_fee' => 0,
             'total_project_sales' => 0,
@@ -55,16 +57,20 @@ class CalculateCostService
                 $service['days']
             );
             $agencyFee = $this->calculateAgencyFee($totalSales, $agencyFeeRate);
-            $totalMargin = $this->calculateTotalMargin($totalCost, $totalSales,$agencyFee);
             $totalProjectSales = $this->calculateTotalProjectSales($totalSales, $agencyFee);
+            $totalMargin = $this->calculateTotalMargin($totalCost, $totalSales,$agencyFee);
+            $marginPercentage = $this->calculateTotalMarginPercentage($totalMargin, $totalProjectSales);
+            $costPercentage = $this->calculateTotalCostPercentage($totalCost, $totalProjectSales);
             $vat = $this->calculateVat($totalProjectSales);
             $totalProject = $this->calculateTotalProject($totalProjectSales, $vat);
 
             $this->updateResult(
                 $result,
                 $totalCost,
+                $costPercentage,
                 $totalSales,
                 $totalMargin,
+                $marginPercentage,
                 $agencyFee,
                 $totalProjectSales,
                 $vat,
@@ -78,16 +84,20 @@ class CalculateCostService
     private function updateResult(
         &$result,
         $totalCost,
+        $costPercentage,
         $totalSales,
         $totalMargin,
+        $marginPercentage,
         $agencyFee,
         $totalProjectSales,
         $vat,
         $totalProject
     ): void {
         $result['total_cost'] += $totalCost;
+        $result['total_cost_percentage'] += $costPercentage;
         $result['total_sales'] += $totalSales;
         $result['total_margin'] += $totalMargin;
+        $result['total_margin_percentage'] += $marginPercentage;
         $result['agency_fee'] += $agencyFee;
         $result['total_project_sales'] += $totalProjectSales;
         $result['vat'] += $vat;
@@ -139,5 +149,15 @@ class CalculateCostService
     private function calculateTotalProject($totalProjectSales, $vat)
     {
         return $totalProjectSales + $vat;
+    }
+
+    private function calculateTotalCostPercentage($totalCost, $totalSales): float|int
+    {
+        return ($totalCost / $totalSales) * 100;
+    }
+
+    private function calculateTotalMarginPercentage($totalMargin, $totalSales): float|int
+    {
+        return ($totalMargin / $totalSales) * 100;
     }
 }
