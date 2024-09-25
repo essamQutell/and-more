@@ -16,7 +16,9 @@ class ProjectSupplierController extends Controller
     {
         $projectSupplier=ProjectSupplier::create($request->validated());
         $projectSupplier->quotation->update([
-            'actual_cost' =>($projectSupplier->quotation->actual_cost) + ($projectSupplier->actual_cost)
+            'actual_cost' =>($projectSupplier->quotation->actual_cost) + ($projectSupplier->actual_cost),
+            'actual_margin'=>($projectSupplier->quotation->total_project_sales) - ($projectSupplier->quotation->actual_cost),
+            'variance' => ($projectSupplier->quotation->actual_margin) - ($projectSupplier->quotation->total_margin)
         ]);
         return self::successResponse(__('application.added'));
     }

@@ -28,7 +28,10 @@ class QuotationResource extends JsonResource
             'agency_fee'=> $this->agency_fee,
             'total_project_sales'=> $this->total_project_sales,
             'vat'=> $this->total_vat,
-            'total_project'=> $this->total_project
+            'total_project'=> $this->total_project,
+            'actual_cost'=>(double) $this->actual_cost,
+            'actual_margin'=>(double) $this->actual_margin,
+            'variance' =>(double) $this->variance
         ];
     }
 }
