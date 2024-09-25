@@ -15,6 +15,7 @@ class AdminRequest extends ApiFormRequest
             'phone' => [Rule::requiredIf($this->routeIs('admins.store')), 'string', 'max:255', Rule::unique('admins', 'phone')->ignore($this->admin)],
             'password' => [Rule::requiredIf($this->routeIs('admins.store')), 'string', 'min:8', 'confirmed'],
             'role_id' => [Rule::requiredIf($this->routeIs('admins.store')), 'exists:roles,id'],
+            'image' => ['file','nullable','mimes:png,jpg,jpeg','max:2048']
         ];
     }
 

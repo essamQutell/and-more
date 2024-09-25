@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeleteSuppliersRequest;
 use App\Http\Requests\Settings\PageRequest;
 use App\Http\Requests\Supplier\StoreSupplierRequest;
 use App\Http\Requests\Supplier\UpdateSupplierRequest;
@@ -48,5 +49,11 @@ class SupplierController extends Controller
     {
         $supplier->delete();
         return self::successResponse(message: __('application.deleted'));
+    }
+
+    public function destroySuppliers(DeleteSuppliersRequest $request)
+    {
+        Supplier::whereIn('id', $request->suppliers)->delete();
+        return self::successResponse(message: __('admin.deleted'));
     }
 }

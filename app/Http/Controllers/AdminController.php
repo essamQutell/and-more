@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AdminRequest;
+use App\Http\Requests\DeleteAdminsRequest;
 use App\Http\Requests\Settings\PageRequest;
 use App\Http\Resources\AdminResource;
 use App\Models\Admin;
@@ -38,7 +39,8 @@ class AdminController extends Controller
         $adminData = $request->safe()->except('role_id', 'password');
         $adminData['password'] = bcrypt($request->password);
         if ($request->hasFile('image')) {
-            $adminData['image'] = $request->file('image')->store('admins', 'public_uploads');
+            $filePath = $request->file('image')->store('admins', 'public_uploads');
+            $adminData['image'] = asset('uploads/' . $filePath) ;
         }
         $admin = Admin::create($adminData);
         $admin->syncRoles([$request->role_id]);
@@ -68,4 +70,13 @@ class AdminController extends Controller
         $admin->delete();
         return self::successResponse(message: __('admin.deleted'));
     }
+
+
+    public function destroyAdmins(DeleteAdminsRequest $request)
+    {
+         Admin::whereIn('id', $request->admins)->delete();
+        return self::successResponse(message: __('admin.deleted'));
+    }
+
+
 }

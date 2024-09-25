@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeletePhasesRequest;
 use App\Http\Requests\PhaseRequest;
 use App\Http\Requests\Settings\PageRequest;
 use App\Http\Resources\PhaseResource;
@@ -56,4 +57,14 @@ class PhaseController extends Controller
 
         return self::successResponse(__('application.deleted'));
     }
+
+
+    public function destroyPhases(DeletePhasesRequest $request)
+    {
+        Phase::whereIn('id', $request->phases)->delete();
+        return self::successResponse(message: __('admin.deleted'));
+    }
+
+
+
 }

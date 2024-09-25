@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\DeleteCategoriesRequest;
 use App\Http\Requests\Settings\PageRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
@@ -48,5 +49,12 @@ class CategoryController extends Controller
         $category->delete();
 
         return self::successResponse(__('application.deleted'));
+    }
+
+
+    public function destroyCategories(DeleteCategoriesRequest $request)
+    {
+        Category::whereIn('id', $request->categories)->delete();
+        return self::successResponse(message: __('admin.deleted'));
     }
 }

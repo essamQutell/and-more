@@ -49,6 +49,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('admins', AdminController::class);
     Route::get('admins/{role}/role', [AdminController::class, 'adminsByRole']);
     Route::post('admins/update/{admin}', [AdminController::class, 'update']);
+    Route::post('admins/destroy', [AdminController::class, 'destroyAdmins']);
 
     Route::apiResource('roles', RoleController::class);
     Route::post('roles/update/{role}', [RoleController::class, 'update']);
@@ -68,15 +69,21 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::apiResource('categories', CategoryController::class);
     Route::post('categories/update/{category}', [CategoryController::class, 'update']);
+    Route::post('categories/destroy', [CategoryController::class, 'destroyCategories']);
+
 
     Route::apiResource('phases', PhaseController::class);
     Route::get('all-phases', [PhaseController::class, 'getPhases']);
     Route::get('main-phases', [PhaseController::class, 'mainPhases']);
     Route::get('sub-phases/{phase}', [PhaseController::class, 'subPhases']);
     Route::post('phases/update/{phase}', [PhaseController::class, 'update']);
+    Route::post('phases/destroy', [PhaseController::class, 'destroyPhases']);
+
 
     Route::post('calculate/service/cost', [QuotationController::class, 'calculateServiceCost']);
     Route::post('calculate/services/cost', [QuotationController::class, 'calculateServicesCost']);
+    Route::post('services/destroy', [ServiceController::class, 'destroyServices']);
+
 
     Route::post('store/quotation', [QuotationController::class, 'store']);
     Route::get('quotation/{project}', [QuotationController::class, 'quotationDetails']);
@@ -88,6 +95,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     );
     Route::get('supplier-teams/{supplier}', [SupplierTeamController::class, 'supplierTeams']);
     Route::get('list/supplier-teams/{supplier}', [SupplierTeamController::class, 'supplierTeamsList']);
+    Route::post('suppliers/destroy', [SupplierController::class, 'destroySuppliers']);
+
 
     Route::post('supplier-teams/update/{supplierTeam}', [SupplierTeamController::class, 'update']);
     Route::post('project-flow/phases/store', [ProjectPhaseController::class, 'storePhases']);

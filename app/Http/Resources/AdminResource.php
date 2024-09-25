@@ -17,6 +17,7 @@ class AdminResource extends JsonResource
             'phone' => (string)$this->phone,
             'access_token' => (string) $this->access_token,
             'role_name' => (string) $this->role()?->name,
+            'image' => (string) $this->image
         ];
     }
 }

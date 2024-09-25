@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeleteServicesRequest;
 use App\Http\Requests\ServiceRequest;
 use App\Http\Requests\Settings\PageRequest;
 use App\Http\Resources\ServiceResource;
@@ -63,5 +64,11 @@ class ServiceController extends Controller
         $service->delete();
 
         return self::successResponse(__('application.deleted'));
+    }
+
+    public function destroyServices(DeleteServicesRequest $request)
+    {
+        Service::whereIn('id', $request->services)->delete();
+        return self::successResponse(message: __('admin.deleted'));
     }
 }
