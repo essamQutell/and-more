@@ -105,6 +105,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('list/items', [PettyCashController::class, 'listItems']);
     Route::get('list/attachments', [PettyCashController::class, 'listAttachments']);
+    Route::get('list/approvals', [PettyCashController::class, 'listApprovals']);
     Route::get('list/progress', [PettyCashController::class, 'listProgress']);
     Route::post('petty-cash/category/store', [PettyCashCategoryController::class, 'store']);
     Route::get('petty-cash/show/{pettyCash}', [PettyCashController::class, 'show']);

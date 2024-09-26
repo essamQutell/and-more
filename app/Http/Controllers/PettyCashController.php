@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ApprovalsEnum;
 use App\Enums\AttachmentEnum;
 use App\Enums\ItemEnum;
 use App\Enums\ProgressEnum;
@@ -38,7 +39,10 @@ class PettyCashController extends Controller
     {
         return self::successResponse(data: SettingListResource::collection(AttachmentEnum::cases()));
     }
-
+    public function listApprovals()
+    {
+        return self::successResponse(data: SettingListResource::collection(ApprovalsEnum::cases()));
+    }
 
     public function listProgress()
     {
