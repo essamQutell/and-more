@@ -11,6 +11,7 @@ class StorePettyCashCategoryRequest extends ApiFormRequest
             'supplier_id' => ['required', 'exists:suppliers,id'],
             'category_id' => ['required', 'exists:categories,id'],
             'item' => ['required', 'integer'],
+            'item_text' => ['required', 'string'],
             'attachment' => ['required', 'integer'],
             'invoice_number' => ['required', 'integer'],
             'invoice_value' => ['required', 'numeric'],
