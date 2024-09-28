@@ -13,7 +13,8 @@ class CalculateServicesRequest extends ApiFormRequest
                'services.*.quantity' => ['required', 'numeric'],
                'services.*.days' => ['required', 'numeric'],
                'services.*.margin' => ['required', 'numeric'],
-               'agency_fee' => ['required', 'numeric'],
+               'agency_fee' => ['nullable', 'numeric'],
+               'discount_percentage' => ['nullable', 'numeric'],
         ];
     }
 }

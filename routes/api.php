@@ -45,6 +45,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('quotations/list', [QuotationController::class, 'quotationStatusList']);
     Route::get('quotation-deal/status/list', [QuotationDealController::class, 'dealStatusCheckList']);
     Route::get('quotations/status/list', [QuotationDealController::class, 'statusCheckList']);
+    Route::get('phases/list', [PhaseController::class, 'phases']);
 
     Route::apiResource('admins', AdminController::class);
     Route::get('admins/{role}/role', [AdminController::class, 'adminsByRole']);
@@ -60,6 +61,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::apiResource('statuses', StatusController::class);
     Route::post('statuses/update/{status}', [StatusController::class, 'update']);
+    Route::post('statuses/destroy', [StatusController::class, 'destroyStatuses']);
 
     Route::apiResource('services', ServiceController::class);
     Route::get('main-services', [ServiceController::class, 'mainServices']);
@@ -96,7 +98,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('supplier-teams/{supplier}', [SupplierTeamController::class, 'supplierTeams']);
     Route::get('list/supplier-teams/{supplier}', [SupplierTeamController::class, 'supplierTeamsList']);
     Route::post('suppliers/destroy', [SupplierController::class, 'destroySuppliers']);
-
+    Route::post('supplier-teams/destroy', [SupplierTeamController::class, 'destroySupplierTeams']);
 
     Route::post('supplier-teams/update/{supplierTeam}', [SupplierTeamController::class, 'update']);
     Route::post('project-flow/phases/store', [ProjectPhaseController::class, 'storePhases']);

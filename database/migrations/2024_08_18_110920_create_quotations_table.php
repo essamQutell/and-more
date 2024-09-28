@@ -11,12 +11,12 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->integer('agency_fee')->default(0.00);
-            $table->double('total_discount')->default(0.00);
             $table->double('total_vat')->default(0.00);
             $table->double('total_cost')->default(0);
             $table->double('total_margin')->default(0);
             $table->double('total_sales')->default(0);
             $table->double('total_project_sales')->default(0);
+            $table->double('total_project_sales_after_discount')->default(0);
             $table->double('total_project')->default(0);
             $table->integer('status')->default(0);
             $table->softDeletes();

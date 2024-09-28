@@ -45,7 +45,7 @@ class QuotationController extends Controller
 
     public function calculateServicesCost(CalculateServicesRequest $request)
     {
-        $servicesCost = $this->calculateCostService->calculateGeneralCost($request->services, $request->agency_fee);
+        $servicesCost = $this->calculateCostService->calculateGeneralCost($request->services, $request->agency_fee, $request->discount_percentage);
         return self::successResponse(data: ServicesCostResource::make($servicesCost));
     }
 
@@ -70,12 +70,12 @@ class QuotationController extends Controller
         return self::successResponse(__('application.updated'), QuotationResource::make($quotation));
     }
 
-    public function update(QuotationRequest $request, Quotation $quotation)
-    {
-        $quotation->update($request->validated());
-
-        return new QuotationResource($quotation);
-    }
+//    public function update(QuotationRequest $request, Quotation $quotation)
+//    {
+//        $quotation->update($request->validated());
+//
+//        return new QuotationResource($quotation);
+//    }
 
     public function destroy(Quotation $quotation)
     {

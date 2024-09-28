@@ -57,6 +57,10 @@ class RoleController extends Controller
 
     public function destroy(Role $role): JsonResponse
     {
+        if ($role->users()->count() > 0) {
+            return self::failResponse(400, message: __('application.role_has_users'));
+        }
+
         $role->delete();
 
         return self::successResponse(message: __('application.deleted'));
