@@ -17,6 +17,8 @@ class ProjectSupplierController extends Controller
         $projectSupplier=ProjectSupplier::create($request->validated());
         $projectSupplier->quotation->update([
             'actual_cost' =>($projectSupplier->quotation->actual_cost) + ($projectSupplier->actual_cost),
+            'cash_flow' => ($projectSupplier->quotation->cash_flow) + ($projectSupplier->deposit),
+            'cash_flow_percentage' => ($projectSupplier->quotation->cash_flow / $projectSupplier->quotation->actual_cost) * 100,
             'actual_margin'=>($projectSupplier->quotation->total_project_sales) - ($projectSupplier->quotation->actual_cost),
             'variance' => ($projectSupplier->quotation->actual_margin) - ($projectSupplier->quotation->total_margin)
         ]);

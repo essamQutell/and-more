@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeleteSupplierTeamsRequest;
 use App\Http\Requests\Settings\PageRequest;
 use App\Http\Requests\SupplierTeam\StoreSupplierTeamRequest;
 use App\Http\Requests\SupplierTeam\UpdateSupplierTeamRequest;
@@ -17,7 +18,9 @@ class SupplierTeamController extends Controller
     public function index(PageRequest $pageRequest)
     {
         $supplierTeams = SupplierTeam::paginate($pageRequest->page_count);;
-        return self::successResponsePaginate(data: SupplierTeamResource::collection( $supplierTeams)->response()->getData(true));
+        return self::successResponsePaginate(
+            data: SupplierTeamResource::collection($supplierTeams)->response()->getData(true)
+        );
     }
 
     public function store(StoreSupplierTeamRequest $request)
@@ -43,10 +46,12 @@ class SupplierTeamController extends Controller
         return self::successResponse(message: __('application.deleted'));
     }
 
-    public function supplierTeams(Supplier $supplier,PageRequest   $pageRequest)
+    public function supplierTeams(Supplier $supplier, PageRequest $pageRequest)
     {
         $supplierTeams = $supplier->supplierTeams()->paginate($pageRequest->page_count);
-        return self::successResponsePaginate(data: SupplierTeamResource::collection($supplierTeams)->response()->getData(true));
+        return self::successResponsePaginate(
+            data: SupplierTeamResource::collection($supplierTeams)->response()->getData(true)
+        );
     }
 
     public function supplierTeamsList(Supplier $supplier)
@@ -54,4 +59,11 @@ class SupplierTeamController extends Controller
         $supplierTeams = $supplier->supplierTeams()->get();
         return self::successResponse(data: SupplierTeamResource::collection($supplierTeams));
     }
+
+    public function destroySupplierTeams(DeleteSupplierTeamsRequest $request)
+    {
+        SupplierTeam::whereIn('id', $request->supplier_teams)->delete();
+        return self::successResponse(message: __('admin.deleted'));
+    }
+
 }

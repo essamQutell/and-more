@@ -31,7 +31,7 @@ class CalculateCostService
         ];
     }
 
-    public function calculateGeneralCost($services, $agency_fee): array
+    public function calculateGeneralCost($services, $agency_fee, $discount_percentage = 0): array
     {
         $result = [
             'total_cost' => 0,
@@ -40,12 +40,13 @@ class CalculateCostService
             'total_margin' => 0,
             'total_margin_percentage' => 0,
             'vat' => 0,
+            'agency_fee_total' => 0,
             'agency_fee' => 0,
+            'discount_percentage' => 0,
             'total_project_sales' => 0,
+            'total_project_sales_after_discount' => 0,
             'total_project' => 0
         ];
-
-        $vatRate = 0.15;
         $agencyFeeRate = $agency_fee / 100;
 
         foreach ($services as $service) {
@@ -56,13 +57,18 @@ class CalculateCostService
                 $service['quantity'],
                 $service['days']
             );
-            $agencyFee = $this->calculateAgencyFee($totalSales, $agencyFeeRate);
-            $totalProjectSales = $this->calculateTotalProjectSales($totalSales, $agencyFee);
-            $totalMargin = $this->calculateTotalMargin($totalCost, $totalSales,$agencyFee);
+            $agencyFeeTotal = $this->calculateAgencyFee($totalSales, $agencyFeeRate);
+            $totalMargin = $this->calculateTotalMargin($totalCost, $totalSales,$agencyFeeTotal);
+
+            $totalProjectSales = $this->calculateTotalProjectSales($totalSales, $agencyFeeTotal);
+
             $marginPercentage = $this->calculateTotalMarginPercentage($totalMargin, $totalProjectSales);
             $costPercentage = $this->calculateTotalCostPercentage($totalCost, $totalProjectSales);
-            $vat = $this->calculateVat($totalProjectSales);
-            $totalProject = $this->calculateTotalProject($totalProjectSales, $vat);
+
+            $totalProjectSalesAfterDiscount = $this->calculateProjectSalesAfterDiscount($totalProjectSales, $discount_percentage);
+
+            $vat = $this->calculateVat($totalProjectSalesAfterDiscount);
+            $totalProject = $this->calculateTotalProject($totalProjectSalesAfterDiscount, $vat);
 
             $this->updateResult(
                 $result,
@@ -71,8 +77,11 @@ class CalculateCostService
                 $totalSales,
                 $totalMargin,
                 $marginPercentage,
-                $agencyFee,
+                $agencyFeeTotal,
+                $discount_percentage,
+                $agency_fee,
                 $totalProjectSales,
+                $totalProjectSalesAfterDiscount,
                 $vat,
                 $totalProject
             );
@@ -88,8 +97,11 @@ class CalculateCostService
         $totalSales,
         $totalMargin,
         $marginPercentage,
-        $agencyFee,
+        $agencyFeeTotal,
+        $discount_percentage,
+        $agency_fee,
         $totalProjectSales,
+        $totalProjectSalesAfterDiscount,
         $vat,
         $totalProject
     ): void {
@@ -98,8 +110,11 @@ class CalculateCostService
         $result['total_sales'] += $totalSales;
         $result['total_margin'] += $totalMargin;
         $result['total_margin_percentage'] += $marginPercentage;
-        $result['agency_fee'] += $agencyFee;
+        $result['agency_fee_total'] += $agencyFeeTotal;
+        $result['discount_percentage'] = $discount_percentage;
+        $result['agency_fee'] = $agency_fee;
         $result['total_project_sales'] += $totalProjectSales;
+        $result['total_project_sales_after_discount'] += $totalProjectSalesAfterDiscount;
         $result['vat'] += $vat;
         $result['total_project'] += $totalProject;
     }
@@ -138,6 +153,12 @@ class CalculateCostService
     private function calculateTotalProjectSales($totalSales, $agencyFee)
     {
         return $totalSales + $agencyFee;
+    }
+
+    private function calculateProjectSalesAfterDiscount($totalProjectSales, $discountPercentage): float|int
+    {
+        $discount = $totalProjectSales * ($discountPercentage / 100);
+        return $totalProjectSales - $discount;
     }
 
     private function calculateVat($totalProjectSales): float|int

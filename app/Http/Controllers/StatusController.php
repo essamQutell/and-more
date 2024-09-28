@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\StatusEnum;
+use App\Http\Requests\DeleteStatusesRequest;
 use App\Http\Requests\Settings\PageRequest;
 use App\Http\Requests\StatusRequest;
 use App\Http\Resources\SettingListResource;
@@ -55,5 +56,11 @@ class StatusController extends Controller
         $status->delete();
 
         return self::successResponse(message: __('application.deleted'));
+    }
+
+    public function destroyStatuses(DeleteStatusesRequest $request)
+    {
+        Status::whereIn('id', $request->statuses)->delete();
+        return self::successResponse(message: __('admin.deleted'));
     }
 }

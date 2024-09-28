@@ -29,16 +29,19 @@ class ProjectService
 
     public function createQuotation($request): Quotation
     {
-        $servicesCost = $this->calculateCostService->calculateGeneralCost($request->services, $request->agency_fee);
+        $servicesCost = $this->calculateCostService->calculateGeneralCost($request->services, $request->agency_fee, $request->discount_percentage);
         return Quotation::create([
             'project_id' => $request->project_id,
             'total_cost' => $servicesCost['total_cost'],
             'total_sales' => $servicesCost['total_sales'],
             'total_margin' => $servicesCost['total_margin'],
             'agency_fee' => $servicesCost['agency_fee'],
+            'discount_percentage' => $servicesCost['discount_percentage'],
+            'agency_fee_total' => $servicesCost['agency_fee_total'],
             'total_vat' => $servicesCost['vat'],
             'total_project' => $servicesCost['total_project'],
             'total_project_sales' => $servicesCost['total_project_sales'],
+            'total_project_sales_after_discount' => $servicesCost['total_project_sales_after_discount'],
         ]);
     }
 

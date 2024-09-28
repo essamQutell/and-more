@@ -16,6 +16,7 @@ return [
     'unauthenticated' => 'unauthenticated',
     'request' => 'request',
     'noReply' => 'noReply',
+    'role_has_users' => 'this role has admins',
     'reply' => ' reply',
     'external' => 'external',
     'internal' => 'internal',
