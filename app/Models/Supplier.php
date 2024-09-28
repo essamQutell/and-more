@@ -22,7 +22,7 @@ class Supplier extends Model
 
     public function projects(): HasManyThrough
     {
-        return $this->hasManyThrough(Project::class, ProjectSupplier::class, 'supplier_id', 'id');
+        return $this->hasManyThrough(Project::class, QuotationDeal::class, 'supplier_id', 'id');
     }
 
     public function supplierTeams(): HasMany
