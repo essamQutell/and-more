@@ -21,7 +21,6 @@ class StoreProjectSupplierRequest extends ApiFormRequest
             'item' => ['required','string'],
             'approvals' => ['required','integer'],
             'due_percentage' => ['required','integer','max:100'],
-            'total_cost' => ['required'],
             'discount' =>[ 'required','numeric'],
             'attachment_id' => ['required','integer'],
         ];
