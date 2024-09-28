@@ -59,6 +59,16 @@ class AdminController extends Controller
         if ($request->password) {
             $adminData['password'] = bcrypt($request->password);
         }
+        if ($request->hasFile('image')) {
+            if ($admin->image) {
+                $oldImagePath = str_replace(asset('uploads/'), '', $admin->image);
+                if (file_exists(public_path('uploads/' . $oldImagePath))) {
+                    unlink(public_path('uploads/' . $oldImagePath));
+                }
+            }
+            $filePath = $request->file('image')->store('admins', 'public_uploads');
+            $adminData['image'] = asset('uploads/' . $filePath);
+        }
         $admin->update($adminData);
         $admin->syncRoles($request->role_id ? [$request->role_id] : []);
 
