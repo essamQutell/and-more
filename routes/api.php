@@ -110,12 +110,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('list/approvals', [PettyCashController::class, 'listApprovals']);
     Route::get('list/progress', [PettyCashController::class, 'listProgress']);
     Route::post('petty-cash/category/store', [PettyCashCategoryController::class, 'store']);
-    Route::get('petty-cash/show/{pettyCash}', [PettyCashController::class, 'show']);
+    Route::get('petty-cash/show/{project}', [PettyCashController::class, 'show']);
     Route::post('petty-cash/update/{project}', [PettyCashController::class, 'update']);
     Route::get('petty-cash/categories/{project}', [PettyCashCategoryController::class, 'show']);
 
     Route::get('suppliers/{project}', [ProjectController::class, 'suppliersByProject']);
-    Route::get('projects/{supplier}', [ProjectController::class, 'projectsBySupplier']);
+    Route::get('projects/list/{supplier}', [ProjectController::class, 'projectsBySupplier']);
 
     Route::post('store/deal', [QuotationDealController::class, 'storeDeal']);
     Route::get('deals/{project}', [QuotationDealController::class, 'dealList']);
