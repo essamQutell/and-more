@@ -13,10 +13,16 @@ class ExtraWorkResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'service' => $this->service?->name,
-            'price' => $this->price,
-            'quantity' => $this->quantity,
-            'days' => $this->days,
+            'project_name' => $this->name,
+            'project_description' => $this->description,
+            'client_name' => $this->client_name,
+            'status' =>(string) $this->statusName(),
+            'deal_status' => $this->dealStatusName(),
+            'location' =>(string) $this->location,
+            'duration' =>(int) $this->duration,
+            'venue' =>(string) $this->venue,
+            'quotation_services' => ServiceQuotationResource::collection($this->quotationServices->map->service->unique('parent_id')),
+            'extra_work_services' => ServiceExtraWorkResource::collection($this->extraworkServices->map->service->unique('parent_id')),
         ];
     }
 }
