@@ -13,8 +13,10 @@ class ExtraWorkResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'service' => $this->service?->name,
+            'price' => $this->price,
+            'quantity' => $this->quantity,
+            'days' => $this->days,
         ];
     }
 }

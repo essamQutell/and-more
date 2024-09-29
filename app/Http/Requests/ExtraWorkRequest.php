@@ -10,6 +10,7 @@ class ExtraWorkRequest extends ApiFormRequest
     {
         return [
             'project_id' => ['required', 'exists:projects,id'],
+            'quotation_id' => ['required', 'exists:quotations,id'],
             'services.*.id' => ['required', 'exists:services,id',
                 function ($attribute, $value, $fail) {
                     $service = Service::find($value);

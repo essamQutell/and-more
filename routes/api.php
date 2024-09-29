@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ExtraWorkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PettyCashCategoryController;
@@ -122,4 +123,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('deals/{project}', [QuotationDealController::class, 'dealList']);
     Route::post('store/project-supplier', [ProjectSupplierController::class,'store']);
     Route::get('get/project-supplier/{project}', [ProjectSupplierController::class,'getProjectSupplier']);
+
+    Route::post('extra-work/store', [ExtraWorkController::class,'store']);
+    Route::get('extra-work/get/{project}', [ExtraWorkController::class,'get']);
+
 });

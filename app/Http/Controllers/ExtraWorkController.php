@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ExtraWorkRequest;
 use App\Http\Resources\ExtraWorkResource;
 use App\Models\ExtraWork;
+use App\Models\Project;
 use App\Traits\ResponseTrait;
 
 class ExtraWorkController extends Controller
@@ -20,6 +21,8 @@ class ExtraWorkController extends Controller
     {
         foreach ($request->services as $service) {
             ExtraWork::create([
+                'project_id' =>  $request->project_id,
+                'quotation_id' => $request->quotation_id,
                 'service_id' => $service['id'],
                 'price' => $service['price'],
                 'quantity' => $service['quantity'],
@@ -28,6 +31,11 @@ class ExtraWorkController extends Controller
         }
 
         return self::successResponse(__('application.added'));
+    }
+
+    public function get(Project $project) {
+
+        return self::successResponse(data: ExtraWorkResource::collection($project->extrawork));
     }
 
 }
