@@ -21,7 +21,7 @@ class ProjectPhaseController extends Controller
     public function storePhases(StoreProjectPhaseRequest $request)
     {
         $project = Project::find($request->project_id);
-        $project->phases()->sync($request->phases);
+        $project->phases()->sync($request->phase_ids);
         return self::successResponse(message: __('application.added'));
     }
 
