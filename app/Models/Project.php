@@ -69,6 +69,11 @@ class Project extends Model
         return $this->hasMany(ProjectDate::class, 'project_id');
     }
 
+    public function extraWorkServices(): HasMany
+    {
+        return $this->hasMany(ExtraWork::class);
+    }
+
     public function quotation(): HasOne
     {
         return $this->hasOne(Quotation::class, 'project_id');

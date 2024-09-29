@@ -12,8 +12,8 @@ class SubServiceExtraWorkResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'qty' => $this->extraworkServices->first()?->quantity,
-            'days' => $this->extraworkServices->first()?->days,
+            'qty' => $this->extraWorkServices->first()?->quantity,
+            'days' => $this->extraWorkServices->first()?->days,
         ];
     }
 }

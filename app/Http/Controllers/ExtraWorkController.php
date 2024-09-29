@@ -33,9 +33,9 @@ class ExtraWorkController extends Controller
         return self::successResponse(__('application.added'));
     }
 
-    public function get(Project $project) {
+    public function extraWorkList(Project $project) {
 
-        return self::successResponse(data: ExtraWorkResource::collection($project->extrawork));
+        return self::successResponse(data: ExtraWorkResource::make($project));
     }
 
 }

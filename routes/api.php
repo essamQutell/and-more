@@ -125,6 +125,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('get/project-supplier/{project}', [ProjectSupplierController::class,'getProjectSupplier']);
 
     Route::post('extra-work/store', [ExtraWorkController::class,'store']);
-    Route::get('extra-work/get/{project}', [ExtraWorkController::class,'get']);
+    Route::get('extra-work/get/{project}', [ExtraWorkController::class,'extraWorkList']);
 
 });
