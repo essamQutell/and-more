@@ -41,7 +41,7 @@ class ProjectController extends Controller
 
     public function projectAdmins(Project $project)
     {
-        return self::successResponsePaginate(AdminResource::collection($project->admins)->response()->getData(true));
+        return self::successResponse(data: AdminResource::collection($project->admins));
     }
 
     public function show(Project $project)
