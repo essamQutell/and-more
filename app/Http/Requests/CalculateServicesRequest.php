@@ -9,6 +9,7 @@ class CalculateServicesRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
+               'services' => ['array', 'min:1', 'required'],
                'services.*.price' => ['required', 'numeric'],
                'services.*.quantity' => ['required', 'numeric'],
                'services.*.days' => ['required', 'numeric'],
