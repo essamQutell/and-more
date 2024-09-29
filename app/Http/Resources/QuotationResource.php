@@ -35,7 +35,8 @@ class QuotationResource extends JsonResource
             'actual_margin'=>(double) $this->actual_margin,
             'cash_flow' => (double)$this->cash_flow,
             'cash_flow_percentage' => (double)$this->cash_flow_percentage,
-            'variance' =>(double) $this->variance
+            'variance' =>(double) $this->variance,
+            'profit' =>(double) $this->profit
         ];
     }
 }

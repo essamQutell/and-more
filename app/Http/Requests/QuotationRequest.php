@@ -12,7 +12,6 @@ class QuotationRequest extends ApiFormRequest
         return [
             'services.*.id' => ['required', 'exists:services,id',
                 function ($attribute, $value, $fail) {
-                    // Check if the service has a parent_id
                     $service = Service::find($value);
                     if ($service && is_null($service->parent_id)) {
                         $fail('The selected service must sub-service not parent.');

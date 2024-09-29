@@ -19,9 +19,9 @@ class PettyCashController extends Controller
 {
     use ResponseTrait;
 
-    public  function show(PettyCash $pettyCash): JsonResponse
+    public  function show(Project $project): JsonResponse
     {
-        return self::successResponse(data: PettyCashResource::make($pettyCash));
+        return self::successResponse(data: PettyCashResource::make($project->pettyCash));
     }
 
     public function update(Project $project, StorePettyCashRequest $request): JsonResponse

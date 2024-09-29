@@ -157,8 +157,7 @@ class CalculateCostService
 
     private function calculateProjectSalesAfterDiscount($totalProjectSales, $discountPercentage): float|int
     {
-        $discount = $totalProjectSales * ($discountPercentage / 100);
-        return $totalProjectSales - $discount;
+        return $totalProjectSales - $discountPercentage;
     }
 
     private function calculateVat($totalProjectSales): float|int

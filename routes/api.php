@@ -58,6 +58,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::apiResource('projects', ProjectController::class);
     Route::post('projects/update/{project}', [ProjectController::class, 'update']);
+    Route::get('project/admins/{project}',);
 
     Route::apiResource('statuses', StatusController::class);
     Route::post('statuses/update/{status}', [StatusController::class, 'update']);

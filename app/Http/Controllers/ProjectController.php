@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Enums\ProjectType;
 use App\Http\Requests\ProjectRequest;
 use App\Http\Requests\Settings\PageRequest;
+use App\Http\Resources\AdminResource;
 use App\Http\Resources\ProjectResource;
 use App\Http\Resources\ScopeOFWorkResource;
 use App\Http\Resources\SettingListResource;
 use App\Http\Resources\SupplierResource;
+use App\Models\Admin;
 use App\Models\Project;
 use App\Models\Supplier;
 use App\Services\ProjectService;
@@ -35,6 +37,11 @@ class ProjectController extends Controller
     {
         $projects = Project::whereStatusId($request->status_id)->paginate($request->page_count);
         return self::successResponsePaginate(ProjectResource::collection($projects)->response()->getData(true));
+    }
+
+    public function projectAdmins(Project $project)
+    {
+        return self::successResponsePaginate(AdminResource::collection($project->admins)->response()->getData(true));
     }
 
     public function show(Project $project)
