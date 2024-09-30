@@ -18,7 +18,7 @@ class QuotationResource extends JsonResource
             'client_name' => $this->project?->client_name,
             'location' => $this->project?->location,
             'type' => $this->project?->type_id?->label(),
-            'status' => $this->status_id?->label(),
+            'status' => $this->status?->label(),
             'project_date' => $this->project?->dates()->whereType(DateEnum::event->value)->first()?->start_date,
             'services' => ServiceQuotationResource::collection($this->quotationServices->map->service->unique('parent_id')),
             'total_cost'=> $this->total_cost,
