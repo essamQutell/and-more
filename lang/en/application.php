@@ -236,6 +236,8 @@ return [
     'not_started' => 'Not Started',
     'ontrack'=>'On Track',
     'critical'=>'Critical',
+    'categories' => 'Categories',
+    'phases' => 'Phases',
 
 
 
