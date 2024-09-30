@@ -13,6 +13,9 @@ enum AdminSectionEnum: int
     case quotations = 7;
     case services = 8;
     case statuses = 9;
+    case categories = 10;
+    case phases = 11;
+    case supplier_teams = 12;
 
     public function label(): string
     {
@@ -26,6 +29,9 @@ enum AdminSectionEnum: int
             self::quotations => __('application.quotations'),
             self::services => __('application.services'),
             self::statuses => __('application.statuses'),
+            self::categories => __('application.categories'),
+            self::phases => __('application.phases'),
+            self::supplier_teams => __('application.supplier_teams'),
         };
     }
 }

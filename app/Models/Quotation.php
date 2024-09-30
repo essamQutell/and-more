@@ -20,7 +20,7 @@ class Quotation extends Model
     protected $with =['project'];
 
     protected $casts = [
-        'status_id' => QuotationStatusEnum::class
+        'status' => QuotationStatusEnum::class
     ];
 
     public function project(): BelongsTo

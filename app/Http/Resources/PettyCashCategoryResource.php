@@ -19,6 +19,7 @@ class PettyCashCategoryResource extends JsonResource
             'supplier' => (string)$this->supplier->name,
             'category'=>(string) $this->category?->name,
             'item' => (string)$this->item?->label(),
+            'item_text' => (string)$this->item_text,
             'attachment' => (string)$this->attachment?->label(),
             'invoice_number' => (int)$this->invoice_number,
             'invoice_value' => (double)$this->invoice_value,

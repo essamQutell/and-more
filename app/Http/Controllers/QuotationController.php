@@ -66,7 +66,7 @@ class QuotationController extends Controller
 
     public function changeStatus(Quotation $quotation, Request $request)
     {
-        $quotation->update(['status_id' => $request->status]);
+        $quotation->update(['status' => $request->status]);
         return self::successResponse(__('application.updated'), QuotationResource::make($quotation));
     }
 

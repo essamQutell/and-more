@@ -262,6 +262,9 @@ return [
     'not_started' => 'لم يبدأ',
     'ontrack'=>'متابع',
     'critical'=>'مهم',
+    'categories' => 'التصنيفات',
+    'phases' => 'المراحل',
+    'supplier_teams' => 'فرق الموردين',
 
 
 ];

@@ -16,6 +16,9 @@ return [
             'roles' => 'c,r,u,d,m,s',
             'admins' => 'c,r,u,d,m,s',
             'suppliers' => 'c,r,u,d,m,s',
+            'categories' => 'c,r,u,d,m,s',
+            'phases' => 'c,r,u,d,m,s',
+            'supplier_teams' => 'c,r,u,d,m,s',
         ],
     ],
 
