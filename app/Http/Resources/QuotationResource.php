@@ -36,7 +36,11 @@ class QuotationResource extends JsonResource
             'cash_flow' => (double)$this->cash_flow,
             'cash_flow_percentage' => (double)$this->cash_flow_percentage,
             'variance' =>(double) $this->variance,
-            'profit' =>(double) $this->profit
+            'profit' =>(double) $this->profit,
+            'scope_work_signature' => $this->scope_work_signature,
+            'scope_work_stamp' => $this->scope_work_stamp,
+            'delivery_note_stamp' => $this->delivery_note_stamp,
+            'delivery_note_signature' => $this->delivery_note_signature,
         ];
     }
 }

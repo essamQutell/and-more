@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('quotations', function (Blueprint $table) {
-            $table->string('scope_work_signature')->nullable()->after('status');
-            $table->string('scope_work_stamp')->nullable()->after('status');
-            $table->string('delivery_note_signature')->nullable()->after('status');
-            $table->string('delivery_note_stamp')->nullable()->after('status');
+            $table->longText('scope_work_signature')->nullable()->after('status');
+            $table->longText('scope_work_stamp')->nullable()->after('status');
+            $table->longText('delivery_note_signature')->nullable()->after('status');
+            $table->longText('delivery_note_stamp')->nullable()->after('status');
         });
     }
 

@@ -100,9 +100,9 @@ class QuotationController extends Controller
                 unlink(public_path('uploads/' . $oldImagePath));
             }
         }
-        $imagePath = $image->store('quotations_images', 'public_uploads');
-        $imagePath = asset('uploads/' . $imagePath) ;
-        $project->quotation->update([$title => $imagePath]);
+        $imageBase64 = base64_encode(file_get_contents($image->getRealPath()));
+        $imageBase64 = 'data:' . $image->getMimeType() . ';base64,' . $imageBase64;
+        $project->quotation->update([$title => $imageBase64]);
         return self::successResponse(data: __('application.added'));
     }
 }
