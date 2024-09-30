@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Service;
 use Illuminate\Validation\Rule;
 
 class ServiceRequest extends ApiFormRequest
@@ -11,7 +12,14 @@ class ServiceRequest extends ApiFormRequest
         return [
             'name_ar' => [Rule::requiredIf($this->routeIs('services.store')), 'string', 'max:255'],
             'name_en' => [Rule::requiredIf($this->routeIs('services.store')), 'string', 'max:255'],
-            'parent_id' => ['nullable', 'exists:services,id'],
+            'parent_id' => ['nullable', 'exists:services,id',function ($attribute, $value, $fail) {
+                if (!is_null($value)) {
+                    $service = Service::find($this->service->id);
+                    if ($service && $service->services()->exists()) {
+                        $fail ('A main service with sub-services cannot be assigned as a child.');
+                    }
+                }
+            }],
         ];
     }
 }
