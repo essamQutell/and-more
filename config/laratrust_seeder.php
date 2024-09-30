@@ -18,6 +18,7 @@ return [
             'suppliers' => 'c,r,u,d,m,s',
             'categories' => 'c,r,u,d,m,s',
             'phases' => 'c,r,u,d,m,s',
+            'supplier_teams' => 'c,r,u,d,m,s',
         ],
     ],
 

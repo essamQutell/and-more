@@ -264,6 +264,7 @@ return [
     'critical'=>'مهم',
     'categories' => 'التصنيفات',
     'phases' => 'المراحل',
+    'supplier_teams' => 'فرق الموردين',
 
 
 ];

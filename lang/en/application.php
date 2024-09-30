@@ -238,6 +238,8 @@ return [
     'critical'=>'Critical',
     'categories' => 'Categories',
     'phases' => 'Phases',
+    'supplier_teams' => 'Supplier Teams',
+
 
 
 
