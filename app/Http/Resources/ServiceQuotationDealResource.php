@@ -12,9 +12,9 @@ class ServiceQuotationDealResource extends JsonResource
     {
         return [
             'id' => $this->quotationServices()->first()?->id,
-            'name' => $this->name,
+            'name' => $this->service?->name,
             'sub_services' => SubServiceQuotationDealResource::collection(
-                $this->services()->whereHas('quotationServices')->get()
+                $this->service?->services()->whereHas('quotationServices')->get()
             ),
         ];
     }
