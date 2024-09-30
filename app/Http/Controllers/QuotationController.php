@@ -7,6 +7,7 @@ use App\Enums\StatusEnum;
 use App\Http\Requests\CalculateServiceRequest;
 use App\Http\Requests\CalculateServicesRequest;
 use App\Http\Requests\QuotationRequest;
+use App\Http\Requests\StoreImageRequest;
 use App\Http\Resources\AdminResource;
 use App\Http\Resources\QuotationResource;
 use App\Http\Resources\ServiceCostResource;
@@ -87,5 +88,21 @@ class QuotationController extends Controller
     public function quotationStatusList(): JsonResponse
     {
         return self::successResponse(data: SettingListResource::collection(QuotationStatusEnum::cases()));
+    }
+
+    public function storeImage(Project $project,  StoreImageRequest $request): JsonResponse
+    {
+        $title = $request->get('title');
+        $image = $request->file('image');
+        if ($project->quotation->$title) {
+            $oldImagePath = str_replace(asset('uploads/'), '', $project->quotation->$title);
+            if (file_exists(public_path('uploads/' . $oldImagePath))) {
+                unlink(public_path('uploads/' . $oldImagePath));
+            }
+        }
+        $imagePath = $image->store('quotations_images', 'public_uploads');
+        $imagePath = asset('uploads/' . $imagePath) ;
+        $project->quotation->update([$title => $imagePath]);
+        return self::successResponse(data: __('application.added'));
     }
 }

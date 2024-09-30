@@ -127,4 +127,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('extra-work/store', [ExtraWorkController::class,'store']);
     Route::get('extra-work/get/{project}', [ExtraWorkController::class,'extraWorkList']);
 
+    Route::post('quotation/{project}/store-image', [QuotationController::class,'storeImage']);
+
 });
