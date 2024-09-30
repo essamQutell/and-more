@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Service;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreQuotationDealRequest extends ApiFormRequest
@@ -10,7 +11,16 @@ class StoreQuotationDealRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'service_id' => ['required','exists:services,id'],
+            'service_id' => [
+                'required',
+                'exists:services,id',
+                function ($attribute, $value, $fail) {
+                    $service = Service::find($value);
+                    if ($service && is_null($service->parent_id)) {
+                        $fail('The selected service must be a sub-service, not a parent.');
+                    }
+                },
+            ],
             'project_id' => ['required','exists:projects,id'],
             'supplier_id' => ['required','exists:suppliers,id'],
             'supplier_team_id' => ['required','exists:supplier_teams,id'],
