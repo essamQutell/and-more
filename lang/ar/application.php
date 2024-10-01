@@ -265,6 +265,12 @@ return [
     'categories' => 'التصنيفات',
     'phases' => 'المراحل',
     'supplier_teams' => 'فرق الموردين',
+    'quotations' => 'التكلفة',
+    'services' => 'الخدمات',
+    'suppliers' => 'الموردين',
+    'projects' => 'المشاريع',
+
+
 
 
 ];
