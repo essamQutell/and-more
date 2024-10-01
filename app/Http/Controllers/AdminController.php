@@ -77,7 +77,11 @@ class AdminController extends Controller
 
     public function destroy(Admin $admin)
     {
+        if ($admin->id == auth()->guard('admin')->user()->id) {
+            auth('admin')->user()->currentAccessToken()->delete();
+        }
         $admin->delete();
+
         return self::successResponse(message: __('admin.deleted'));
     }
 
