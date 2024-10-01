@@ -9,11 +9,9 @@ use App\Enums\ProgressEnum;
 use App\Http\Requests\StorePettyCashRequest;
 use App\Http\Resources\PettyCashResource;
 use App\Http\Resources\SettingListResource;
-use App\Models\PettyCash;
 use App\Models\Project;
 use App\Traits\ResponseTrait;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class PettyCashController extends Controller
 {
@@ -26,7 +24,10 @@ class PettyCashController extends Controller
 
     public function update(Project $project, StorePettyCashRequest $request): JsonResponse
     {
-        $project->pettyCash()->update(['total_cost'=>$request->total_cost]);
+        $project->pettyCash()->update([
+            'total_cost' => $request->total_cost,
+            'remaining' => $request->total_cost - $project->pettyCash->expenses,
+        ]);
         return self::successResponse(message: __('application.updated'));
     }
 
