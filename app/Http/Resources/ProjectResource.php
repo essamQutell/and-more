@@ -30,7 +30,13 @@ class ProjectResource extends JsonResource
             'dismantle_dates' => ProjectDateResource::make($this->projectDates(DateEnum::dismantle->value)),
             'status' => $this->statusName(),
             'deal_status' => $this->dealStatusName(),
-            'admins' => AdminResource::collection($this->admins),
+            //            'roles' => $this->admins->map(function ($admin) {
+//                return $admin->roles()->first()->id ?? null; // Assuming 'id' is the role's primary key
+//            }),
+
+            'roles' => RoleAdminResource::collection($this->admins->map(function ($admin) {
+                return $admin->roles()->first() ?? null; // Assuming 'id' is the role's primary key
+            })),
         ];
     }
 }
