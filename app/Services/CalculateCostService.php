@@ -27,7 +27,8 @@ class CalculateCostService
             'margin' => $margin,
             'sales_price' => $salesPrice,
             'total_sales' => $totalSales,
-            'vat' => $vat
+            'vat' => $vat,
+            'total_margin' => $totalSales - $cost
         ];
     }
 
