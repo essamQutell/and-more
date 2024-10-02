@@ -48,42 +48,59 @@ class ProjectService
     public function createQuotationServices(int $quotationId, array $services): void
     {
         foreach ($services as $service) {
-            $this->createQuotationService($quotationId, $service);
-
-            if (!empty($service['service_name']['sub_service_name'])) {
-                $this->createSubQuotationServices($service, $quotationId);
-            }
+            $serviceCost = $this->calculateCostService->calculateSingleCost($service);
+            QuotationService::create([
+                'quotation_id' => $quotationId,
+                'service_id' => $service['id'],
+                'price' => $service['price'],
+                'margin' => $service['margin'],
+                'quantity' => $service['quantity'],
+                'days' => $service['days'],
+                'cost' => $serviceCost['cost'],
+                'sales_price' => $serviceCost['sales_price'],
+            ]);
         }
     }
 
-    private function createQuotationService(int $quotationId, array $service, ?int $parentId = null): int
-    {
-        $serviceCost = $this->calculateCostService->calculateSingleCost($service);
-
-        $quotationService = QuotationService::create([
-            'quotation_id' => $quotationId,
-            'parent_id' => $parentId,
-            'service_id' => $service['id'],
-            'service_name' => $service['service_name'],
-            'price' => $service['price'],
-            'margin' => $service['margin'],
-            'quantity' => $service['quantity'],
-            'days' => $service['days'],
-            'cost' => $serviceCost['cost'],
-            'sales_price' => $serviceCost['sales_price'],
-        ]);
-
-        return $quotationService->id;
-    }
-
-    private function createSubQuotationServices(array $service, int $quotationId): void
-    {
-        $parentId = $this->createQuotationService($quotationId, $service);
-
-        foreach ($service['service_name']['sub_service_name'] as $subService) {
-            $this->createQuotationService($quotationId, $subService, $parentId);
-        }
-    }
+//    public function createQuotationServices(int $quotationId, array $services): void
+//    {
+//        foreach ($services as $service) {
+//            $this->createQuotationService($quotationId, $service);
+//
+//            if (!empty($service['service_name']['sub_service_name'])) {
+//                $this->createSubQuotationServices($service, $quotationId);
+//            }
+//        }
+//    }
+//
+//    private function createQuotationService(int $quotationId, array $service, ?int $parentId = null): int
+//    {
+//        $serviceCost = $this->calculateCostService->calculateSingleCost($service);
+//
+//        $quotationService = QuotationService::create([
+//            'quotation_id' => $quotationId,
+//            'parent_id' => $parentId,
+//            'service_id' => $service['id'],
+//            'service_name' => $service['service_name'],
+//            'price' => $service['price'],
+//            'margin' => $service['margin'],
+//            'quantity' => $service['quantity'],
+//            'days' => $service['days'],
+//            'cost' => $serviceCost['cost'],
+//            'sales_price' => $serviceCost['sales_price'],
+//        ]);
+//
+//        return $quotationService->id;
+//    }
+//
+//    private function createSubQuotationServices(array $service, int $quotationId): void
+//    {
+//        $parentId = $this->createQuotationService($quotationId, $service);
+//
+//        foreach ($service['service_name']['sub_service_name'] as $subService) {
+//            $this->createQuotationService($quotationId, $subService, $parentId);
+//        }
+//    }
 
 
 }
