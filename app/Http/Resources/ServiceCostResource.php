@@ -15,7 +15,6 @@ class ServiceCostResource extends JsonResource
             'sales_price' => (double)$this['sales_price'],
             'total_sales' => (double)$this['total_sales'],
             'vat' => (double)$this['vat'],
-            'total_margin' => (double)$this['total_margin'],
         ];
     }
 }
