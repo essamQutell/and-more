@@ -24,6 +24,7 @@ class ProjectResource extends JsonResource
             'location' => $this->location,
             'venue' => $this->venue,
             'type' => $this->type_id?->label(),
+            'project_number' => 'AM-'.rand(1111, 9999),
             'event_dates' => ProjectDateResource::make($this->projectDates(DateEnum::event->value)),
             'setup_dates' => ProjectDateResource::make($this->projectDates(DateEnum::setUp->value)),
             'dismantle_dates' => ProjectDateResource::make($this->projectDates(DateEnum::dismantle->value)),
